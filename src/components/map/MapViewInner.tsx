@@ -10,6 +10,7 @@ function MapClickHandler() {
 
   useMapEvents({
     click(e) {
+      console.log(e)
       setLocation(e.latlng.lat, e.latlng.lng);
     },
   });

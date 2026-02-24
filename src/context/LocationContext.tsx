@@ -4,8 +4,8 @@ import { createContext, type ReactNode, useContext, useState } from "react";
 
 type LocationContextType = {
   lat: number | null;
-  lan: number | null;
-  setLocation: (lat: number, lan: number) => void;
+  lng: number | null;
+  setLocation: (lat: number, lng: number) => void;
 };
 
 type LocationProviderProps = {
@@ -16,14 +16,14 @@ const LocationContext = createContext<LocationContextType | null>(null);
 
 function LocationContextProvider({ children }: LocationProviderProps) {
   const [lat, setLat] = useState<number | null>(null);
-  const [lan, setLan] = useState<number | null>(null);
-  function setLocation(lat: number, lan: number) {
+  const [lng, setlng] = useState<number | null>(null);
+  function setLocation(lat: number, lng: number) {
     setLat(lat);
-    setLan(lan);
+    setlng(lng);
   }
 
   return (
-    <LocationContext.Provider value={{ lat, lan, setLocation }}>
+    <LocationContext.Provider value={{ lat, lng, setLocation }}>
       {children}
     </LocationContext.Provider>
   );
