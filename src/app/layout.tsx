@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LocationContextProvider } from "@/context/LocationContext";
 
 export const metadata: Metadata = {
   title: "SunTerra Atlas",
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <LocationContextProvider>{children}</LocationContextProvider>
       </body>
     </html>
   );

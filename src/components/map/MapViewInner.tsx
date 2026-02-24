@@ -2,6 +2,19 @@
 
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useMapEvents } from "react-leaflet";
+import { useLocationContext } from "@/context/LocationContext";
+
+function MapClickHandler() {
+  const { setLocation } = useLocationContext();
+
+  useMapEvents({
+    click(e) {
+      setLocation(e.latlng.lat, e.latlng.lng);
+    },
+  });
+  return null;
+}
 
 export default function MapViewInner() {
   return (
@@ -16,6 +29,7 @@ export default function MapViewInner() {
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <MapClickHandler />
       </MapContainer>
     </div>
   );
