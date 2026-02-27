@@ -19,7 +19,7 @@ function MapClickHandler() {
 
 export default function MapViewInner() {
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full mx-3">
       <MapContainer
         center={[40.4168, -3.7038]} // Madrid
         zoom={6}
