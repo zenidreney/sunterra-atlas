@@ -54,7 +54,7 @@ export default function MapViewInner() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MapClickHandler />
-        <CenterMap lat={String(lat)} lng={String(lng)} />
+        {lat && lng && <CenterMap lat={String(lat)} lng={String(lng)} />}
       </MapContainer>
     </div>
   );
