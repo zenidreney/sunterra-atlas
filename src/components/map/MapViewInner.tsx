@@ -1,29 +1,27 @@
 "use client";
 
 import { useEffect } from "react";
-import { useMap } from "react-leaflet";
-
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useMapEvents } from "react-leaflet";
 import { useLocationContext } from "@/context/LocationContext";
 
 type CenterMapProps = {
-	lng: string | null;
-	lat: string | null;
+  lng: string | null;
+  lat: string | null;
 };
 
 function CenterMap({ lat, lng }: CenterMapProps) {
-	const map = useMap();
+  const map = useMap();
 
-	useEffect(() => {
-		if (lat && lng) {
-			const center: [number, number] = [parseFloat(lat), parseFloat(lng)];
-			map.setView(center, map.getZoom());
-		}
-	}, [lat, lng, map]);
+  useEffect(() => {
+    if (lat && lng) {
+      const center: [number, number] = [parseFloat(lat), parseFloat(lng)];
+      map.setView(center, map.getZoom());
+    }
+  }, [lat, lng, map]);
 
-	return null;
+  return null;
 }
 
 function MapClickHandler() {
@@ -31,7 +29,6 @@ function MapClickHandler() {
 
   useMapEvents({
     click(e) {
-      console.log(e)
       setLocation(e.latlng.lat, e.latlng.lng);
     },
   });
@@ -39,7 +36,7 @@ function MapClickHandler() {
 }
 
 export default function MapViewInner() {
-  const {lat, lng} = useLocationContext()
+  const { lat, lng } = useLocationContext();
 
   return (
     <div className="h-screen w-full mx-3">
