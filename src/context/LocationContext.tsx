@@ -16,10 +16,10 @@ const LocationContext = createContext<LocationContextType | null>(null);
 
 function LocationContextProvider({ children }: LocationProviderProps) {
   const [lat, setLat] = useState<number | null>(null);
-  const [lng, setlng] = useState<number | null>(null);
+  const [lng, setLng] = useState<number | null>(null);
   function setLocation(lat: number, lng: number) {
     setLat(lat);
-    setlng(lng);
+    setLng(lng);
   }
 
   return (
