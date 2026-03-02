@@ -1,50 +1,49 @@
 import { useRef, useState } from "react";
-import getCoordinates, {type GetCoordinatesResult} from "@/utils/getCoordinates";
+import getCoordinates, {
+  type GetCoordinatesResult,
+} from "@/utils/getCoordinates";
 import { useLocationContext } from "@/context/LocationContext";
-
-
 
 export default function TopBar() {
   const [locationData, setLocationData] = useState<
     GetCoordinatesResult[] | null
   >(null);
-  const [isLocationSubmitted, setIsLocationSubmitted] = useState<boolean>(false)
+  const [isLocationSubmitted, setIsLocationSubmitted] =
+    useState<boolean>(false);
 
   const mapInputRef = useRef<HTMLInputElement>(null);
 
   const { setLocation } = useLocationContext();
 
-
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setIsLocationSubmitted(true)
+    setIsLocationSubmitted(true);
 
     const locationQuery = mapInputRef.current?.value
       ? mapInputRef.current.value.trim()
       : "";
 
-    if(!locationQuery) return
+    if (!locationQuery) return;
 
     try {
       const data = await getCoordinates(locationQuery);
 
-  
-     if (data.length > 0) {
-       setLocationData(data);
-       setLocation(Number(data[0].lat), Number(data[0].lon));
-     } else {
-      setIsLocationSubmitted(false)
-     }
+      if (!data || data.length === 0) {
+        setIsLocationSubmitted(false);
+      } else {
+        setLocationData(data);
+        setLocation(Number(data[0].lat), Number(data[0].lon));
+      }
     } catch (error) {
-      console.error(`Cannot fetch coordinates beacuse of ${error}`)
+      console.error(`Cannot fetch coordinates beacuse of ${error}`);
     }
   }
 
   function handleLocationOptionButton(location: GetCoordinatesResult) {
     setLocation(Number(location.lat), Number(location.lon));
-    setIsLocationSubmitted(false)
-    setLocationData(null)
+    setIsLocationSubmitted(false);
+    setLocationData(null);
   }
 
   const searchLocationOptions = locationData?.map((loc) => {
@@ -133,7 +132,9 @@ export default function TopBar() {
           Get Location
         </button>
       </form>
-      {isLocationSubmitted && <div className="flex-col">{searchLocationOptions}</div>}
+      {isLocationSubmitted && (
+        <div className="flex-col">{searchLocationOptions}</div>
+      )}
     </div>
   );
 }
