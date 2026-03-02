@@ -19,7 +19,7 @@ export default async function getReverseGeocode(
     const res = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`,
       {
-        headers: { "User-Agent": "sunterra-atlas-student-project/1.0" },
+        headers: { "User-Agent": "sunterra-atlas-student-project/1.0 (contact: zenid@tuta.io)" },
       },
     );
 

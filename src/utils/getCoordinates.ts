@@ -20,7 +20,7 @@ export default async function getCoordinates(location: string) {
         const res = await fetch(
             `https://nominatim.openstreetmap.org/search?format=json&q=${location}`,
             {
-                headers: { "User-Agent": "sunterra-atlas-student-project/1.0" },
+                headers: { "User-Agent": "sunterra-atlas-student-project/1.0 (contact: zenid@tuta.io)"},
             },
         );
         if (!res.ok) {
