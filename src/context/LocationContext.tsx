@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, type ReactNode, useContext, useState } from "react";
 
@@ -29,13 +29,13 @@ function LocationContextProvider({ children }: LocationProviderProps) {
   );
 }
 
-function useLocationContext () {
-    const context = useContext(LocationContext)
-    if(!context) {
-        throw new Error("useLocationContext to be used inside LocationProvider")
-    }
+function useLocationContext() {
+  const context = useContext(LocationContext);
+  if (!context) {
+    throw new Error("useLocationContext to be used inside LocationProvider");
+  }
 
-    return context
+  return context;
 }
 
 export { LocationContextProvider, useLocationContext };

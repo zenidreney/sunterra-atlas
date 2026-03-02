@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LocationContextProvider } from "@/context/LocationContext";
 
+
+
 export const metadata: Metadata = {
   title: "SunTerra Atlas",
   description: "Geospatial Solar Potential Intelligence Platform",

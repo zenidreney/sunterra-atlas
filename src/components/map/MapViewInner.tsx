@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useMapEvents } from "react-leaflet";
 import { useLocationContext } from "@/context/LocationContext";
+
+import { setupLeafletIcons } from "@/lib/leaflet";
+
+setupLeafletIcons();
 
 type CenterMapProps = {
   lng: string | null;
@@ -52,6 +56,13 @@ export default function MapViewInner() {
         />
         <MapClickHandler />
         {lat && lng && <CenterMap lat={String(lat)} lng={String(lng)} />}
+        {lat && lng && (
+          <Marker position={[lat, lng]}>
+            <Popup>
+              Selected location: {lat.toFixed(4)}, {lng.toFixed(4)}
+            </Popup>
+          </Marker>
+        )}
       </MapContainer>
     </div>
   );
