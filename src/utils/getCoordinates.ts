@@ -1,3 +1,20 @@
+export type GetCoordinatesResult = {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  display_name: string;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  name: string;
+  addresstype: string;
+  boundingbox: string[];
+};
+
 export default async function getCoordinates(location: string) {
     try {
         const res = await fetch(
@@ -10,7 +27,7 @@ export default async function getCoordinates(location: string) {
             console.log(res.status);
             throw new Error(`Request Error Code: ${res.status} `);
         }
-        const data = await res.json();
+        const data = await res.json() as GetCoordinatesResult;
 
         if (!Array.isArray(data) || data.length === 0) {
             alert("Please enter a valid city or town in the text box");

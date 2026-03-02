@@ -1,23 +1,8 @@
 import { useRef, useState } from "react";
-import getCoordinates from "@/utils/getCoordinates";
+import getCoordinates, {type GetCoordinatesResult} from "@/utils/getCoordinates";
 import { useLocationContext } from "@/context/LocationContext";
 
-type GetCoordinatesResult = {
-  place_id: number;
-  licence: string;
-  osm_type: string;
-  osm_id: number;
-  lat: string;
-  lon: string;
-  display_name: string;
-  class: string;
-  type: string;
-  place_rank: number;
-  importance: number;
-  name: string;
-  addresstype: string;
-  boundingbox: string[];
-};
+
 
 export default function TopBar() {
   const [locationData, setLocationData] = useState<
