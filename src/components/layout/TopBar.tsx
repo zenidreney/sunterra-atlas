@@ -40,7 +40,7 @@ export default function TopBar() {
         setLocation(Number(data[0].lat), Number(data[0].lon));
       }
     } catch (error) {
-      console.error(`Cannot fetch coordinates beacuse of ${error}`);
+      alert(`Cannot fetch coordinates beacuse of ${error}`);
     }
   }
 

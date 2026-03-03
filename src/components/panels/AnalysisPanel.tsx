@@ -29,7 +29,7 @@ export default function AnalysisPanel() {
         const data = await getReverseGeocode(lat, lng);
         setLocationName(data?.display_name ?? null);
       } catch (error) {
-        alert(`Seem like nobody lives there: ${error}`)
+        alert(`Cannot find location: ${error}`)
         console.log(error)
       }
     }

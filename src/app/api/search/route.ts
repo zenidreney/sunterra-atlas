@@ -16,24 +16,30 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const res = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`,
-            {
-                headers: { "User-Agent": "sunterra-atlas-student-project/1.0 (contact: zenid@tuta.io)"},
-            },
-        );
-
-    if(!res.ok) {
-        return NextResponse.json(
-            {error: `Nomatim error: ${res.status}`},
-            {status: res.status}
-        )
-    }
-
-    const data = await res.json()
-
-    // console.log(data)
-
-    return NextResponse.json(data)
+  try {
+    const res = await fetch(
+              `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`,
+              {
+                  headers: { "User-Agent": "sunterra-atlas-student-project/1.0 (contact: zenid@tuta.io)"},
+              },
+          );
+  
+      if(!res.ok) {
+          return NextResponse.json(
+              {error: `Nomatim error: ${res.status}`},
+              {status: res.status}
+          )
+      }
+  
+      const data = await res.json()
+  
+      // console.log(data)
+  
+      return NextResponse.json(data)
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Server error ${error}` },
+      { status: 500 })
+  }
 
 }

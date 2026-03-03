@@ -15,25 +15,21 @@ export default async function getReverseGeocode(
   lat: number,
   lng: number,
 ): Promise<ReverseGeocodeResult | null> {
-  try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`,
-      {
-        headers: { "User-Agent": "sunterra-atlas-student-project/1.0 (contact: zenid@tuta.io)" },
-      },
-    );
+  
+    const res = await fetch(`/api/reverse?lat=${lat}&lng=${lng}`);
+    // console.log(res)
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) {
+      const errorMessage = await res.json()
+      throw new Error(`${errorMessage.error} Status: ${res.status} ` || "Unknown Error")
+    }
 
-    const data = (await res.json()) as ReverseGeocodeResult;
+    const data = await res.json() as ReverseGeocodeResult;
 
     if (!data.display_name) {
-      throw new Error("No location found");
+      return null
     }
 
     return data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+
 }
