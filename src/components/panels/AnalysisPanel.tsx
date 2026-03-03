@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
@@ -17,9 +17,7 @@ export default function AnalysisPanel() {
   const { lat, lng } = useLocationContext();
   const [solarData, setSolarData] = useState<SolarData | null>(null);
 
-  const [locationName, setLocationName] = useState<string | null>(
-    null,
-  );
+  const [locationName, setLocationName] = useState<string | null>(null);
 
   useEffect(() => {
     async function getLocationName() {
@@ -27,10 +25,15 @@ export default function AnalysisPanel() {
 
       try {
         const data = await getReverseGeocode(lat, lng);
-        setLocationName(data?.display_name ?? null);
+
+        if (!data?.display_name) {
+          alert("Oh seems like no people living there!!!");
+        } 
+          setLocationName(data?.display_name ?? null);
+        
       } catch (error) {
-        alert(`Cannot find location: ${error}`)
-        console.log(error)
+        alert(`Cannot find location: ${error}`);
+        console.log(error);
       }
     }
     getLocationName();
@@ -56,7 +59,7 @@ export default function AnalysisPanel() {
   return (
     <div>
       <p>ANALYSIS PANEL</p>
-      
+
       {locationName && <p>Analyzing: {locationName}</p>}
       <div className="flex">
         <p>Latitude: {lat?.toFixed(2)}</p>
