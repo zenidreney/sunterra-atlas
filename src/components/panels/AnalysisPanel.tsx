@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
@@ -25,7 +27,6 @@ export default function AnalysisPanel() {
 
       try {
         const data = await getReverseGeocode(lat, lng);
-        console.log(typeof data?.display_name);
         setLocationName(data?.display_name ?? null);
       } catch (error) {
         alert(`Seem like nobody lives there: ${error}`)

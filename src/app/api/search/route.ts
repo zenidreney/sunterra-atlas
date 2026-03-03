@@ -3,11 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-//   console.log("console", searchParams.get("location"));
-
   const location = searchParams.get("location");
-
-//   console.log(typeof location)
 
   if (!location) {
     return NextResponse.json(

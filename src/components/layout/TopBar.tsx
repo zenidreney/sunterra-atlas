@@ -1,8 +1,10 @@
+"use client"
+
 import { useRef, useState } from "react";
+import { useLocationContext } from "@/context/LocationContext";
 import getCoordinates, {
   type GetCoordinatesResult,
 } from "@/utils/getCoordinates";
-import { useLocationContext } from "@/context/LocationContext";
 
 export default function TopBar() {
   const [locationData, setLocationData] = useState<
@@ -31,6 +33,8 @@ export default function TopBar() {
 
       if (!data || data.length === 0) {
         setIsLocationSubmitted(false);
+        alert("Please enter a valid city or town in the text box");
+
       } else {
         setLocationData(data);
         setLocation(Number(data[0].lat), Number(data[0].lon));

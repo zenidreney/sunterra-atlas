@@ -16,7 +16,6 @@ export default async function getCoordinates(location: string) {
         const data = await res.json() as GetCoordinatesResult[];
 
         if (!Array.isArray(data) || data.length === 0) {
-            // alert("Please enter a valid city or town in the text box");
             return null
         }
 
