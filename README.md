@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌞 SunTerra Atlas
 
-## Getting Started
+Geospatial Solar Potential Intelligence Platform
 
-First, run the development server:
+SunTerra Atlas is a fullstack geospatial web application that analyzes solar radiation potential for any selected location on Earth.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It integrates public climate datasets with interactive map-based exploration.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Live Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+👉 Deployed on Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📌 Features
 
-## Learn More
+🌍 Interactive map-based location selection
 
-To learn more about Next.js, take a look at the following resources:
+📍 Reverse geocoding for human-readable place names
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+☀️ Solar radiation analysis (2001–2020 climatology)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📊 Annual solar potential data display
 
-## Deploy on Vercel
+⚡ Server-side API proxying for external services
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🧠 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Frontend
+
+React (App Router)
+TypeScript
+Context API
+
+Backend (Serverless)
+
+Next.js API Routes
+
+External APIs
+
+NASA POWER API (solar climatology data)
+OpenStreetMap Nominatim (geocoding)
+
+Deployment
+
+Vercel
+
+⚙️ Architecture Notes
+
+External API calls are proxied through Next.js API routes
+
+Prevents CORS issues
+
+Protects request headers
+
+Keeps client clean and minimal
+
+👨‍💻 Author
+
+Deniz Yener
+Fullstack Developer | Geospatial Systems Enthusiast
