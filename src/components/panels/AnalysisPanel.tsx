@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
@@ -15,21 +17,27 @@ export default function AnalysisPanel() {
   const { lat, lng } = useLocationContext();
   const [solarData, setSolarData] = useState<SolarData | null>(null);
 
-  const [locationName, setLocationName] = useState<string | null>(
-    null,
-  );
+  const [locationName, setLocationName] = useState<string | null>(null);
 
   useEffect(() => {
+    if (lat == null || lng == null) return;
+    const currentLat = lat
+    const currentLng = lng
+    setLocationName(null);
+    
     async function getLocationName() {
-      if (lat == null || lng == null) return;
-
       try {
-        const data = await getReverseGeocode(lat, lng);
-        console.log(typeof data?.display_name);
-        setLocationName(data?.display_name ?? null);
+        const data = await getReverseGeocode(currentLat, currentLng);
+
+        if (!data?.display_name) {
+          alert("Oh seems like no people living there!!!");
+          return;
+        }
+
+        setLocationName(data.display_name);
       } catch (error) {
-        alert(`Seem like nobody lives there: ${error}`)
-        console.log(error)
+        alert(`Cannot find location: ${error}`);
+        console.log(error);
       }
     }
     getLocationName();
@@ -37,17 +45,22 @@ export default function AnalysisPanel() {
 
   useEffect(() => {
     if (lat == null || lng == null) return;
+    setSolarData(null);
 
     async function fetchData() {
-      const data = await getSolarData(lat, lng);
+      try {
+        const data = await getSolarData(lat, lng);
 
-      setSolarData({
-        annualSolarRadiation: data.properties.parameter.ALLSKY_SFC_SW_DWN.ANN,
-        dataType: data.parameters.ALLSKY_SFC_SW_DWN.longname,
-        units: data.parameters.ALLSKY_SFC_SW_DWN.units,
-        dataSource: data.header.title,
-        dataRange: data.header.range,
-      });
+        setSolarData({
+          annualSolarRadiation: data.properties.parameter.ALLSKY_SFC_SW_DWN.ANN,
+          dataType: data.parameters.ALLSKY_SFC_SW_DWN.longname,
+          units: data.parameters.ALLSKY_SFC_SW_DWN.units,
+          dataSource: data.header.title,
+          dataRange: data.header.range,
+        });
+      } catch (error) {
+        alert(`Somethings off error: ${error}`);
+      }
     }
     fetchData();
   }, [lat, lng]);
@@ -55,7 +68,7 @@ export default function AnalysisPanel() {
   return (
     <div>
       <p>ANALYSIS PANEL</p>
-      
+
       {locationName && <p>Analyzing: {locationName}</p>}
       <div className="flex">
         <p>Latitude: {lat?.toFixed(2)}</p>
