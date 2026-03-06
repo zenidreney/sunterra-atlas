@@ -8,7 +8,9 @@ export default function AppLayout() {
       <TopBar />
       <div className="flex flex-col md:flex-row-reverse flex-1 my-3">
           <AnalysisPanel />
-          <MapView />
+          <div className="w-full lg:w-2/3 h-[50vh] lg:h-auto rounded-xl overflow-hidden shadow-lg">
+            <MapView />
+          </div>
       </div>
     </div>
   );
