@@ -43,7 +43,7 @@ export default function MapViewInner() {
   const { lat, lng } = useLocationContext();
 
   return (
-    <div className="h-screen w-full mx-3">
+    <div className="h-screen w-full">
       <MapContainer
         center={[40.4168, -3.7038]} // Madrid
         zoom={6}

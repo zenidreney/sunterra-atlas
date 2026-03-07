@@ -56,21 +56,7 @@ export default function TopBar() {
         type="button"
         key={loc.osm_id}
         onClick={() => handleLocationOptionButton(loc)}
-        className="
-              bg-linear-to-r
-              from-blue-500
-              to-green-500
-              text-black
-              font-semibold
-              py-3
-              rounded-lg
-              shadow-lg
-              hover:shadow-xl
-              hover:scale-[1.02]
-              active:scale-95
-              transition-all
-              duration-200
-                        "
+        className=""
       >
         {loc.display_name}
       </button>
@@ -79,18 +65,10 @@ export default function TopBar() {
 
   return (
     <div
-      className="flex 
-        flex-col 
-        items-center"
+      className="flex flex-col items-center"
     >
       <h1
-        className="mb-3 
-            bg-blue-200 
-            text-center
-            px-3 
-            py-4 
-            rounded-lg
-            shadow-lg"
+        className="mb-3 bg-blue-200 text-centerpx-3 py-4 rounded-lgshadow-lg"
       >
         SunTerra Atlas
       </h1>
@@ -101,37 +79,11 @@ export default function TopBar() {
           id="map-input"
           type="text"
           placeholder="Enter lat,lng or address"
-          className="w-80
-         bg-green-500
-              text-white
-          px-4
-          py-3
-          rounded-lg
-          border-b
-          border-gray-300/50
-          backdrop-blur-sm
-          focus:outline-none
-          focus:border-white/70
-          transition-all"
+          className=""
         />
         <button
           type="submit"
-          className="
-              w-36
-              bg-linear-to-r
-              from-blue-500
-              to-green-500
-              text-black
-              font-semibold
-              py-3
-              rounded-lg
-              shadow-lg
-              hover:shadow-xl
-              hover:scale-[1.02]
-              active:scale-95
-              transition-all
-              duration-200
-                        "
+          className=""
         >
           Get Location
         </button>
