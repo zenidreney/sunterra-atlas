@@ -46,7 +46,7 @@ export default function MapViewInner() {
     <div className="h-screen w-full">
       <MapContainer
         center={[40.4168, -3.7038]} // Madrid
-        zoom={2.5}
+        zoom={5.5}
         scrollWheelZoom
         className="h-full w-full"
       >
@@ -54,6 +54,7 @@ export default function MapViewInner() {
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        
         <MapClickHandler />
         {lat && lng && <CenterMap lat={String(lat)} lng={String(lng)} />}
         {lat && lng && (

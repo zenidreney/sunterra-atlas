@@ -90,6 +90,7 @@ export default function TopBar() {
         </button>
         {isSearchLoading && <p className="px-4 py-3 border border-orange-900 rounded-lg  bg-orange-900 text-orange-200">Searching...</p>}
       </form>
+      <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">Enter a location above or simply click on the map to start</p>
       {isLocationSubmitted && (
         <div className="flex flex-col rounded-xl p-1 md:p-2 gap-2 w-full max-w-3xl shadow">{searchLocationOptions}</div>
       )}

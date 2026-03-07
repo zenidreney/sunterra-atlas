@@ -10,7 +10,7 @@ export default function AppLayout() {
           <div className="w-full md:w-1/3 bg-white/90 px-1 md:px-4 rounded-xl">
             <AnalysisPanel />
           </div>
-          <div className="w-full md:w-2/3 h-auto rounded-xl overflow-hidden shadow-lg ">
+          <div className="w-full md:w-2/3 h-auto px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
             <MapView />
           </div>
       </main>
