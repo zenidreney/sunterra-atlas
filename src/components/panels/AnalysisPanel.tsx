@@ -19,18 +19,20 @@ export default function AnalysisPanel() {
 
   const [locationName, setLocationName] = useState<string | null>(null);
 
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false)
+
   useEffect(() => {
     if (lat == null || lng == null) return;
-    const currentLat = lat
-    const currentLng = lng
+    const currentLat = lat;
+    const currentLng = lng;
     setLocationName(null);
-    
+
     async function getLocationName() {
       try {
         const data = await getReverseGeocode(currentLat, currentLng);
 
         if (!data?.display_name) {
-          alert("Oh seems like no people living there!!!");
+          // alert("Oh seems like no people living there!!!");
           return;
         }
 
@@ -49,6 +51,7 @@ export default function AnalysisPanel() {
 
     async function fetchData() {
       try {
+        setIsDataLoading(true)
         const data = await getSolarData(lat, lng);
 
         setSolarData({
@@ -60,32 +63,53 @@ export default function AnalysisPanel() {
         });
       } catch (error) {
         alert(`Somethings off error: ${error}`);
+      } finally {
+        setIsDataLoading(false)
       }
     }
     fetchData();
   }, [lat, lng]);
 
   return (
-    <div>
-      <p>ANALYSIS PANEL</p>
-
-      {locationName && <p>Analyzing: {locationName}</p>}
-      <div className="flex">
-        <p>Latitude: {lat?.toFixed(2)}</p>
-        <p>Longitude: {lng?.toFixed(2)}</p>
-      </div>
+    <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
+      <h2 className="text-xl text-bold text-orange-600">Solar Analysis</h2>
+      {isDataLoading && <p>Loading..</p>}
 
       {solarData && (
-        <div>
-          <p>Data from: {solarData.dataSource} </p>
-          <p>{solarData.dataRange} </p>
-          <p>Data Type: {solarData.dataType}</p>
-
-          <p>Annual Solar Radiation: {solarData.annualSolarRadiation}</p>
-
-          <p>{solarData.units} </p>
-        </div>
+        <>
+          <p className="text-sm">Location:</p>{" "}
+          {locationName ? <p>{locationName}</p> : "Somewhere in the ocean"}
+          <div className=" text-sm flex gap-1">
+            <p>Latitude: {lat?.toFixed(2)}</p>
+            <p>Longitude: {lng?.toFixed(2)}</p>
+          </div>
+          <div className="flex flex-col space-y-1 md:space-y-3">
+            <div className="flex flex-col border rounded-xl px-1 py-2 shadow-xl bg-orange-100">
+              <p className="text-sm text-bold text-gray-600">
+                Annual Solar Radiation:{" "}
+              </p>
+              <p className="text-xl md:text-3xl font-bold text-orange-500">
+                {solarData.annualSolarRadiation}
+              </p>
+              <p>{solarData.units} </p>
+            </div>
+            <div className="flex flex-col text-sm space-y-1">
+              <p>
+                <span className="font-medium">Data from:</span>{" "}
+                {solarData.dataSource}{" "}
+              </p>
+              <p>
+                <span className="font-medium">Period:</span>{" "}
+                {solarData.dataRange}{" "}
+              </p>
+              <p>
+                <span className="font-medium">Data Type:</span>{" "}
+                {solarData.dataType}
+              </p>
+            </div>
+          </div>
+        </>
       )}
-    </div>
+    </section>
   );
 }
