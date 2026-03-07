@@ -14,7 +14,6 @@ export default async function getCoordinates(location: string) {
             throw new Error(`${errorMessage.error} Status: ${res.status} ` || "Unknown Error");
         }
         const data = await res.json() as GetCoordinatesResult[];
-        console.log(data)
 
         if (!Array.isArray(data) || data.length === 0) {
             return null
