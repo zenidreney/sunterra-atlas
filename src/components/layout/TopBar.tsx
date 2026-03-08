@@ -73,9 +73,13 @@ export default function TopBar() {
       className="flex flex-col items-center gap-3 p-3 
     bg-linear-to-b from-yellow-50 to-orange-200 shadow-md"
     >
-      <h1 className="text-xl md:text-2xl font-bold text-orange-700 ">
-        SunTerra Atlas
-      </h1>
+      <div className="flex flex-col items-center">
+        <h1 className="text-xl md:text-2xl font-bold text-orange-700">
+          SunTerra Atlas
+        </h1>
+        <a href="https://github.com/zenidreney/sunterra-atlas" className="text-xs hover:underline hover:bg-orange-100">Source Code</a>
+      </div>
+      
 
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2">
         <input
