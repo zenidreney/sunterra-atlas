@@ -6,7 +6,7 @@ SunTerra Atlas is a geospatial web application that analyzes solar radiation pot
 
 It integrates public climate datasets with interactive map-based exploration.
 
-🚀 [Live Demo](https://sunterra-atlas.vercel.app) Deployed on Vercel
+🚀 [Live Demo](https://sunterra-atlas.vercel.app) deployed on Vercel
 
 📌 Features
 
@@ -35,7 +35,7 @@ Backend (Serverless)
 External APIs
 
 - NASA POWER API (solar climatology data)
-- OpenStreetMap Nominatim (geocoding and reverser geocoding)
+- OpenStreetMap Nominatim (geocoding and reverse geocoding)
 
 Deployment
 
@@ -50,6 +50,11 @@ Deployment
 - Protects request headers
 
 - Keeps client clean and minimal
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](https://github.com/zenidreney/sunterra-atlas/blob/main/LICENSE) file for details.  
+Feel free to use, modify, and share.
 
 👨‍💻 Author
 
