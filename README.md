@@ -2,7 +2,7 @@
 
 Geospatial Solar Potential Intelligence Platform
 
-SunTerra Atlas is a fullstack geospatial web application that analyzes solar radiation potential for any selected location on Earth.
+SunTerra Atlas is a geospatial web application that analyzes solar radiation potential for any selected location on Earth.
 
 It integrates public climate datasets with interactive map-based exploration.
 
@@ -56,4 +56,9 @@ Keeps client clean and minimal
 👨‍💻 Author
 
 Deniz Yener
-Fullstack Developer | Geospatial Systems Enthusiast
+
+Frontend Developer | Geospatial Systems Enthusiast
+
+[LinkedIn](https://www.linkedin.com/in/zenid/)
+
+[Portfolio](https://zenid.netlify.app)
