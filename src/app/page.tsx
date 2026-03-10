@@ -1,6 +1,6 @@
 
-import AppLayout from "@/components/layout/AppLayout";
+import AnalysisPanel from "@/components/panels/AnalysisPanel";
 
 export default function Home() {
-  return <AppLayout />;
+  return <AnalysisPanel />;
 }

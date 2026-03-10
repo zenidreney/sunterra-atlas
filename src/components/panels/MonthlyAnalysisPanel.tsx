@@ -7,8 +7,24 @@ import getSolarData from "@/utils/getSolarData";
 
 import Link from "next/link";
 
+type MonthlyData = {
+  JAN: number;
+  FEB: number;
+  MAR: number;
+  APR: number;
+  MAY: number;
+  JUN: number;
+  JUL: number;
+  AUG: number;
+  SEP: number;
+  OCT: number;
+  NOV: number;
+  DEC: number;
+  ANN: number;
+};
+
 type SolarData = {
-  solarRadiation: number | null;
+  solarRadiation: MonthlyData | null;
   dataType: string | null;
   units: string | null;
   dataSource: string | null;
@@ -21,7 +37,7 @@ export default function AnalysisPanel() {
 
   const [locationName, setLocationName] = useState<string | null>(null);
 
-  const [isDataLoading, setIsDataLoading] = useState<boolean>(false)
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (lat == null || lng == null) return;
@@ -53,11 +69,12 @@ export default function AnalysisPanel() {
 
     async function fetchData() {
       try {
-        setIsDataLoading(true)
+        setIsDataLoading(true);
         const data = await getSolarData(lat, lng);
+        console.log(data.properties.parameter.ALLSKY_SFC_SW_DWN);
 
         setSolarData({
-          solarRadiation: data.properties.parameter.ALLSKY_SFC_SW_DWN.ANN,
+          solarRadiation: data.properties.parameter.ALLSKY_SFC_SW_DWN,
           dataType: data.parameters.ALLSKY_SFC_SW_DWN.longname,
           units: data.parameters.ALLSKY_SFC_SW_DWN.units,
           dataSource: data.header.title,
@@ -66,16 +83,45 @@ export default function AnalysisPanel() {
       } catch (error) {
         alert(`Somethings off error: ${error}`);
       } finally {
-        setIsDataLoading(false)
+        setIsDataLoading(false);
       }
     }
     fetchData();
   }, [lat, lng]);
 
+  const detailedData = Object.entries(solarData?.solarRadiation ?? {});
+
+  useEffect(() => {
+    console.log(detailedData[0]);
+  }, [detailedData]);
+
+  const monthlyDetails = detailedData.map((mon) => {
+    const month = mon[0];
+    const solarRadiation = mon[1];
+
+    if (month === "ANN") {
+      return (
+        <div key={month}>
+          <p>
+            <span className="font-bold text-red-700">MEAN:</span> {solarRadiation}
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div key={month}>
+          <p>
+            <span className="font-bold">{month}:</span> {solarRadiation}
+          </p>
+        </div>
+      );
+    }
+  });
+
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
       <h2 className="text-xl font-bold text-orange-600">Solar Analysis</h2>
-      {isDataLoading && <p>Loading..</p>}
+      {isDataLoading && <p className="font-bold">Solar Data is loading..</p>}
 
       {solarData && (
         <>
@@ -88,17 +134,17 @@ export default function AnalysisPanel() {
           <div className="flex flex-col space-y-1 md:space-y-3">
             <div className="flex flex-col border rounded-xl px-1 py-2 shadow-xl bg-orange-100">
               <p className="text-sm font-bold text-gray-600">
-                Annual Solar Radiation:{" "}
+                Monthly Solar Radiation:{" "}
               </p>
-              <p className="text-xl md:text-3xl font-bold text-orange-500">
-                {solarData.solarRadiation}
+              <p className="text-sm md:text-md text-grey-500">
+                {monthlyDetails}
               </p>
               <p>{solarData.units} </p>
-              <Link 
-                href={`/monthly`}
+              <Link
+                href={"/"}
                 className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-                >
-              Get Monthly
+              >
+                Back to summary
               </Link>
             </div>
             <div className="flex flex-col text-sm space-y-1">
