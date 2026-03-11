@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
 import getSolarData from "@/utils/getSolarData";
-
-import Link from "next/link";
 
 type MonthlyData = {
   JAN: number;
@@ -103,7 +102,8 @@ export default function AnalysisPanel() {
       return (
         <div key={month}>
           <p>
-            <span className="font-bold text-red-700">MEAN:</span> {solarRadiation}
+            <span className="font-bold text-red-700">MEAN:</span>{" "}
+            {solarRadiation}
           </p>
         </div>
       );

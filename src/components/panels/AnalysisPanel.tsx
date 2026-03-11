@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
 import getSolarData from "@/utils/getSolarData";
-
-import Link from "next/link";
 
 type SolarData = {
   solarRadiation: number | null;
@@ -21,7 +20,7 @@ export default function AnalysisPanel() {
 
   const [locationName, setLocationName] = useState<string | null>(null);
 
-  const [isDataLoading, setIsDataLoading] = useState<boolean>(false)
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (lat == null || lng == null) return;
@@ -53,7 +52,7 @@ export default function AnalysisPanel() {
 
     async function fetchData() {
       try {
-        setIsDataLoading(true)
+        setIsDataLoading(true);
         const data = await getSolarData(lat, lng);
 
         setSolarData({
@@ -66,7 +65,7 @@ export default function AnalysisPanel() {
       } catch (error) {
         alert(`Somethings off error: ${error}`);
       } finally {
-        setIsDataLoading(false)
+        setIsDataLoading(false);
       }
     }
     fetchData();
@@ -94,11 +93,11 @@ export default function AnalysisPanel() {
                 {solarData.solarRadiation}
               </p>
               <p>{solarData.units} </p>
-              <Link 
+              <Link
                 href={`/monthly`}
                 className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-                >
-              Get Monthly
+              >
+                Get Monthly
               </Link>
             </div>
             <div className="flex flex-col text-sm space-y-1">
