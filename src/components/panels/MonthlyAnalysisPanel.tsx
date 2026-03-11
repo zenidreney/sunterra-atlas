@@ -6,6 +6,10 @@ import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
 import getSolarData from "@/utils/getSolarData";
 
+import MonthlyChart from "./MonthlyBarChart";
+
+
+
 type MonthlyData = {
   JAN: number;
   FEB: number;
@@ -90,33 +94,18 @@ export default function AnalysisPanel() {
 
   const detailedData = Object.entries(solarData?.solarRadiation ?? {});
 
-  useEffect(() => {
-    console.log(detailedData[0]);
-  }, [detailedData]);
+  const data = detailedData
+    .filter((data) => data[0] !== "ANN")
+    .map(([month, data]) => {
+      
 
-  const monthlyDetails = detailedData.map((mon) => {
-    const month = mon[0];
-    const solarRadiation = mon[1];
+      return {
+        month: month,
+        solarRadiation: data,
+      };
+    });
 
-    if (month === "ANN") {
-      return (
-        <div key={month}>
-          <p>
-            <span className="font-bold text-red-700">MEAN:</span>{" "}
-            {solarRadiation}
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div key={month}>
-          <p>
-            <span className="font-bold">{month}:</span> {solarRadiation}
-          </p>
-        </div>
-      );
-    }
-  });
+  
 
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
@@ -125,7 +114,7 @@ export default function AnalysisPanel() {
 
       {solarData && (
         <>
-          <p className="text-sm font-bold">Location:</p>{" "}
+          <p className="text-sm font-bold">Location:</p>
           {locationName ? <p>{locationName}</p> : "Somewhere in the ocean"}
           <div className=" text-sm flex gap-1">
             <p>Latitude: {lat?.toFixed(2)}</p>
@@ -134,12 +123,11 @@ export default function AnalysisPanel() {
           <div className="flex flex-col space-y-1 md:space-y-3">
             <div className="flex flex-col border rounded-xl px-1 py-2 shadow-xl bg-orange-100">
               <p className="text-sm font-bold text-gray-600">
-                Monthly Solar Radiation:{" "}
+                Monthly Solar Radiation:
               </p>
-              <p className="text-sm md:text-md text-grey-500">
-                {monthlyDetails}
-              </p>
-              <p>{solarData.units} </p>
+            
+              <MonthlyChart data={data}/>
+              <p className="text-sm font-bold text-gray-600">{solarData.units} </p>
               <Link
                 href={"/"}
                 className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
@@ -149,15 +137,15 @@ export default function AnalysisPanel() {
             </div>
             <div className="flex flex-col text-sm space-y-1">
               <p>
-                <span className="font-medium">Data from:</span>{" "}
-                {solarData.dataSource}{" "}
+                <span className="font-medium">Data from:</span>
+                {solarData.dataSource}
               </p>
               <p>
-                <span className="font-medium">Period:</span>{" "}
-                {solarData.dataRange}{" "}
+                <span className="font-medium">Period:</span>
+                {solarData.dataRange}
               </p>
               <p>
-                <span className="font-medium">Data Type:</span>{" "}
+                <span className="font-medium">Data Type:</span>
                 {solarData.dataType}
               </p>
             </div>
