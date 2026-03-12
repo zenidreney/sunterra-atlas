@@ -4,7 +4,7 @@ import { LocationContextProvider } from "@/context/LocationContext";
 
 import MapView from "@/components/map/MapView";
 
-import TopBar from "@/components/layout/TopBar";
+import TopBar from "@/components/panels/TopBar";
 
 export const metadata: Metadata = {
   title: "SunTerra Atlas",

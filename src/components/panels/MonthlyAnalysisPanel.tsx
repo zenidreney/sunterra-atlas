@@ -6,7 +6,7 @@ import { useLocationContext } from "@/context/LocationContext";
 import getReverseGeocode from "@/utils/getReverseGeocode";
 import getSolarData from "@/utils/getSolarData";
 
-import MonthlyChart from "./MonthlyBarChart";
+import MonthlyChart from "../charts/MonthlyBarChart";
 
 
 
