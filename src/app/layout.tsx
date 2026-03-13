@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { LocationContextProvider } from "@/context/LocationContext";
-import { QueryProvider } from "./providers/QueryProvider";
 
 import MapView from "@/components/map/MapView";
-
 import TopBar from "@/components/panels/TopBar";
+import { LocationContextProvider } from "@/context/LocationContext";
+import { QueryProvider } from "./providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "SunTerra Atlas",

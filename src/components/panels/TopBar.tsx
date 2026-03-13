@@ -116,9 +116,9 @@ export default function TopBar() {
           </p>
         )}
       </form>
-      <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">
+      {/* <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">
         Enter a location above or simply click on the map to start
-      </p>
+      </p> */}
       {isLocationSubmitted && (
         <div className="flex flex-col rounded-xl p-1 md:p-2 gap-2 w-full max-w-3xl shadow">
           {searchLocationOptions}

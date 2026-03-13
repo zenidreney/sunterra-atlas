@@ -1,22 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import { useReverseGeoCode, useSolarData } from "@/app/providers/QueryProvider";
 import { useLocationContext } from "@/context/LocationContext";
-import { useSolarData, useReverseGeoCode } from "@/app/providers/QueryProvider";
-
-
 
 export default function AnalysisPanel() {
   const { lat, lng } = useLocationContext();
-  const { data, isLoading } = useSolarData(lat, lng);
+  const { data, isLoading, status } = useSolarData(lat, lng);
+
+  console.log(data, isLoading, status)
   const { data: locationData } = useReverseGeoCode(lat, lng);
 
   if (isLoading) {
-    return <p>Wait a little...</p>;
+    return (
+      <p className="px-4 py-3 border border-orange-900 rounded-lg  bg-orange-900 text-orange-200">
+        Searching...
+      </p>
+    );
   }
 
   if (!data) {
-    return <p> No Data pick a place!!</p>;
+    return (
+      <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">
+        Enter a location above or simply click on the map to start
+      </p>
+    );
   }
 
   const solarRadiation = data.properties.parameter.ALLSKY_SFC_SW_DWN.ANN;
