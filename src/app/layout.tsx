@@ -5,6 +5,7 @@ import MapView from "@/components/map/MapView";
 import TopBar from "@/components/panels/TopBar";
 import { LocationContextProvider } from "@/context/LocationContext";
 import { QueryProvider } from "./providers/QueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "SunTerra Atlas",
@@ -33,6 +34,7 @@ export default function RootLayout({
               </main>
             </div>
           </LocationContextProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryProvider>
       </body>
     </html>
