@@ -7,115 +7,49 @@ import getReverseGeocode from "@/utils/getReverseGeocode";
 import getSolarData from "@/utils/getSolarData";
 
 import MonthlyChart from "../charts/MonthlyBarChart";
-
-
-
-type MonthlyData = {
-  JAN: number;
-  FEB: number;
-  MAR: number;
-  APR: number;
-  MAY: number;
-  JUN: number;
-  JUL: number;
-  AUG: number;
-  SEP: number;
-  OCT: number;
-  NOV: number;
-  DEC: number;
-  ANN: number;
-};
-
-type SolarData = {
-  solarRadiation: MonthlyData | null;
-  dataType: string | null;
-  units: string | null;
-  dataSource: string | null;
-  dataRange: string | null;
-};
+import { useSolarData, useReverseGeoCode } from "@/app/providers/QueryProvider";
 
 export default function AnalysisPanel() {
   const { lat, lng } = useLocationContext();
-  const [solarData, setSolarData] = useState<SolarData | null>(null);
+  const { data, isLoading } = useSolarData(lat, lng);
 
-  const [locationName, setLocationName] = useState<string | null>(null);
+  const { data: locationData } = useReverseGeoCode(lat, lng);
 
-  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
+  if (isLoading) {
+    return <p>Wait a little...</p>;
+  }
 
-  useEffect(() => {
-    if (lat == null || lng == null) return;
-    const currentLat = lat;
-    const currentLng = lng;
-    setLocationName(null);
+  if (!data) {
+    return <p> No Data pick a place!!</p>;
+  }
 
-    async function getLocationName() {
-      try {
-        const data = await getReverseGeocode(currentLat, currentLng);
 
-        if (!data?.display_name) {
-          // alert("Oh seems like no people living there!!!");
-          return;
-        }
+  const solarRadiation = data.properties.parameter.ALLSKY_SFC_SW_DWN;
+  const dataType = data.parameters.ALLSKY_SFC_SW_DWN.longname;
+  const units = data.parameters.ALLSKY_SFC_SW_DWN.units;
+  const dataSource = data.header.title;
+  const dataRange = data.header.range;
 
-        setLocationName(data.display_name);
-      } catch (error) {
-        alert(`Cannot find location: ${error}`);
-        console.log(error);
-      }
-    }
-    getLocationName();
-  }, [lat, lng]);
+  const locationName = locationData?.display_name ?? "Somewhere in the OCEAN";
 
-  useEffect(() => {
-    if (lat == null || lng == null) return;
-    setSolarData(null);
+  const detailedData = Object.entries(solarRadiation ?? {});
 
-    async function fetchData() {
-      try {
-        setIsDataLoading(true);
-        const data = await getSolarData(lat, lng);
-        console.log(data.properties.parameter.ALLSKY_SFC_SW_DWN);
-
-        setSolarData({
-          solarRadiation: data.properties.parameter.ALLSKY_SFC_SW_DWN,
-          dataType: data.parameters.ALLSKY_SFC_SW_DWN.longname,
-          units: data.parameters.ALLSKY_SFC_SW_DWN.units,
-          dataSource: data.header.title,
-          dataRange: data.header.range,
-        });
-      } catch (error) {
-        alert(`Somethings off error: ${error}`);
-      } finally {
-        setIsDataLoading(false);
-      }
-    }
-    fetchData();
-  }, [lat, lng]);
-
-  const detailedData = Object.entries(solarData?.solarRadiation ?? {});
-
-  const data = detailedData
+  const dataMap = detailedData
     .filter((data) => data[0] !== "ANN")
-    .map(([month, data]) => {
-      
-
+    .map(([month, value]) => {
       return {
         month: month,
-        solarRadiation: data,
+        solarRadiation: value as number,
       };
     });
-
-  
 
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
       <h2 className="text-xl font-bold text-orange-600">Solar Analysis</h2>
-      {isDataLoading && <p className="font-bold">Solar Data is loading..</p>}
 
-      {solarData && (
-        <>
+        
           <p className="text-sm font-bold">Location:</p>
-          {locationName ? <p>{locationName}</p> : "Somewhere in the ocean"}
+          <p>{locationName}</p>
           <div className=" text-sm flex gap-1">
             <p>Latitude: {lat?.toFixed(2)}</p>
             <p>Longitude: {lng?.toFixed(2)}</p>
@@ -125,9 +59,11 @@ export default function AnalysisPanel() {
               <p className="text-sm font-bold text-gray-600">
                 Monthly Solar Radiation:
               </p>
-            
-              <MonthlyChart data={data}/>
-              <p className="text-sm font-bold text-gray-600">{solarData.units} </p>
+
+              <MonthlyChart data={dataMap} />
+              <p className="text-sm font-bold text-gray-600">
+                {units}
+              </p>
               <Link
                 href={"/"}
                 className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
@@ -138,20 +74,20 @@ export default function AnalysisPanel() {
             <div className="flex flex-col text-sm space-y-1">
               <p>
                 <span className="font-medium">Data from:</span>
-                {solarData.dataSource}
+                {dataSource}
               </p>
               <p>
                 <span className="font-medium">Period:</span>
-                {solarData.dataRange}
+                {dataRange}
               </p>
               <p>
                 <span className="font-medium">Data Type:</span>
-                {solarData.dataType}
+                {dataType}
               </p>
             </div>
           </div>
-        </>
-      )}
+        
+      
     </section>
   );
 }
