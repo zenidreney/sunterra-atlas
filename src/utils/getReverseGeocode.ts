@@ -12,8 +12,8 @@ export type ReverseGeocodeResult = {
 };
 
 export default async function getReverseGeocode(
-  lat: number,
-  lng: number,
+  lat: number | null,
+  lng: number | null,
 ): Promise<ReverseGeocodeResult | null> {
   
     const res = await fetch(`/api/reverse?lat=${lat}&lng=${lng}`);
