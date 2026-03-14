@@ -6,7 +6,14 @@ import getCoordinates, {
   type GetCoordinatesResult,
 } from "@/utils/getCoordinates";
 
+import Link from "next/link";
+
+import { usePathname } from "next/navigation";
+
 export default function TopBar() {
+  
+  const pathname = usePathname()
+  console.log(pathname)
   const [locationData, setLocationData] = useState<
     GetCoordinatesResult[] | null
   >(null);
@@ -116,14 +123,39 @@ export default function TopBar() {
           </p>
         )}
       </form>
-      {/* <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">
-        Enter a location above or simply click on the map to start
-      </p> */}
+
       {isLocationSubmitted && (
         <div className="flex flex-col rounded-xl p-1 md:p-2 gap-2 w-full max-w-3xl shadow">
           {searchLocationOptions}
         </div>
       )}
+
+      <nav>
+        <ul className="flex gap-3">
+          <li>
+            <Link href="/"
+            className={
+              `rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
+              ${
+                pathname === "/" ? "bg-orange-500" : "text-white hover:bg-orange-500"
+              } 
+              `
+            }
+            >Summary</Link>
+          </li>
+          <li>
+            <Link href="/monthly"
+            className={
+              `rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
+              ${
+                pathname === "/monthly" ? "bg-orange-500" : "text-white hover:bg-orange-500"
+              } 
+              `
+            }
+            >Details</Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }

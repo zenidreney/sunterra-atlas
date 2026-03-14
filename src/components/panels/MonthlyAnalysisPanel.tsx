@@ -90,15 +90,15 @@ export default function AnalysisPanel() {
         </div>
         <div className="flex flex-col text-sm space-y-1">
           <p>
-            <span className="font-medium">Data from:</span>
+            <span className="font-medium">Data from: </span>
             {dataSource}
           </p>
           <p>
-            <span className="font-medium">Period:</span>
+            <span className="font-medium">Period: </span>
             {dataRange}
           </p>
           <p>
-            <span className="font-medium">Data Type:</span>
+            <span className="font-medium">Data Type: </span>
             {dataType}
           </p>
         </div>

@@ -56,18 +56,18 @@ export default function AnalysisPanel() {
             href={`/monthly`}
             className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
           >
-            Get Monthly
+            Monthly Details
           </Link>
         </div>
         <div className="flex flex-col text-sm space-y-1">
           <p>
-            <span className="font-medium">Data from:</span> {dataSource}
+            <span className="font-medium">Data from: </span> {dataSource}
           </p>
           <p>
-            <span className="font-medium">Period:</span> {dataRange}
+            <span className="font-medium">Period: </span> {dataRange}
           </p>
           <p>
-            <span className="font-medium">Data Type:</span> {dataType}
+            <span className="font-medium">Data Type: </span> {dataType}
           </p>
         </div>
       </div>
