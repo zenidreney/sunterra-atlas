@@ -4,21 +4,21 @@ Geospatial Solar Potential Intelligence Platform
 
 SunTerra Atlas is a geospatial web application that analyzes solar radiation potential for any selected location on Earth.
 
-It integrates public climate datasets with interactive map-based exploration.
+The platform combines interactive map exploration with climate datasets to help visualize solar energy potential worldwide.
 
 🚀 [Live Demo](https://sunterra-atlas.vercel.app) deployed on Vercel
 
-📌 Features
+🌍 Interactive map-based location selection using React Leaflet
 
-🌍 Interactive map-based location selection
+📍 Reverse geocoding to convert coordinates into human-readable locations
 
-📍 Reverse geocoding for human-readable place names
+☀️ Solar radiation analysis based on long-term climatology datasets (2001–2020)
 
-☀️ Solar radiation analysis (2001–2020 climatology)
+📊 Annual and monthly solar potential visualization
 
-📊 Annual solar potential data display
+⚡ Optimized server-state fetching and caching with TanStack React Query
 
-⚡ Server-side API proxying for external services
+📈 Data visualization dashboards built with Recharts
 
 ## Tech Stack
 
@@ -27,6 +27,11 @@ Frontend
 - React (App Router)
 - TypeScript
 - Context API
+
+Data Fetching & State Management
+
+- TanStack React Query
+- React Context API
 
 Backend (Serverless)
 
@@ -50,6 +55,14 @@ Deployment
 - Protects request headers
 
 - Keeps client clean and minimal
+
+Server-state caching with React Query ensures fast UI updates when switching between analysis views.
+
+📊 Data Source
+
+Solar radiation data is sourced from the NASA POWER API, which provides global climatological averages for solar energy potential.
+
+Dataset used: ALLSKY_SFC_SW_DWN (Surface Downwelling Shortwave Radiation)
 
 ## License
 
