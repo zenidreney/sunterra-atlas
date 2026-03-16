@@ -58,15 +58,15 @@ export default function MapViewInner() {
         className="h-full w-full"
       >
         <LayersControl position="topright">
-          <LayersControl.BaseLayer checked name="OSM">
+          <LayersControl.BaseLayer checked name="Standard OSM">
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="HOT">
+          <LayersControl.BaseLayer name="Humanitarian OSM">
             <TileLayer
-              attribution='&copy; OpenStreetMap contributors, Tiles style by <a href="https://www.hotosm.org/">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/">OpenStreetMap France</a>'
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/">OpenStreetMap France</a>'
               url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             />
           </LayersControl.BaseLayer>
