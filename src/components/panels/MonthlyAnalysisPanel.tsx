@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useReverseGeoCode, useSolarData } from "@/app/providers/QueryProvider";
 import { useLocationContext } from "@/context/LocationContext";
-import MonthlyChart from "../charts/MonthlyBarChart";
 
 type MonthlyData = {
   JAN: number;
@@ -21,7 +20,15 @@ type MonthlyData = {
   ANN: number;
 };
 
-export default function AnalysisPanel() {
+type ChartComponent = React.ComponentType<{
+  data: { month: string; solarRadiation: number }[];
+}>;
+
+export default function MonthlyAnalysisPanel({
+  Chart,
+}: {
+  Chart: ChartComponent;
+}) {
   const { lat, lng } = useLocationContext();
   const { data, isLoading } = useSolarData(lat, lng);
 
@@ -79,14 +86,29 @@ export default function AnalysisPanel() {
             Monthly Solar Radiation:
           </p>
 
-          <MonthlyChart data={dataMap} />
+          <Chart data={dataMap} />
+          
           <p className="text-sm font-bold text-gray-600">{units}</p>
-          <Link
-            href={"/"}
-            className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-          >
-            Back to summary
-          </Link>
+          <nav className="flex flex-row flex-wrap gap-3 md:gap-1">
+            <Link
+              href="/"
+              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
+            >
+              Summary
+            </Link>
+             <Link
+              href="/monthly/"
+              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
+            >
+              Bar
+            </Link>
+            <Link
+              href="/monthly/sync-line"
+              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
+            >
+              Sync-Line
+            </Link>
+          </nav>
         </div>
         <div className="flex flex-col text-sm space-y-1">
           <p>

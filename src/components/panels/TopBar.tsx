@@ -152,7 +152,18 @@ export default function TopBar() {
               } 
               `
             }
-            >Details</Link>
+            >Bar Chart</Link>
+          </li>
+           <li>
+            <Link href="/monthly/sync-line"
+            className={
+              `rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
+              ${
+                pathname === "/monthly/sync-line" ? "bg-orange-500" : "text-white hover:bg-orange-500"
+              } 
+              `
+            }
+            >Sync Line Chart</Link>
           </li>
         </ul>
       </nav>
