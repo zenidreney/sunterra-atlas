@@ -90,8 +90,8 @@ export default function MonthlyAnalysisPanel({
 
           <Chart data={dataMap} />
 
-          <p className="text-sm font-bold text-gray-600">{units}</p>
-          <p>Choose Chart Style</p>
+          <p className="text-sm text-gray-600">Units: {units}</p>
+          <p>Choose Chart Style:</p>
           <nav className="flex flex-wrap gap-3 md:gap-1">
             <ul className="flex flex-wrap gap-2">
               <li>
