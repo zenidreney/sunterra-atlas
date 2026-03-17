@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useReverseGeoCode, useSolarData } from "@/app/providers/QueryProvider";
 import { useLocationContext } from "@/context/LocationContext";
 
+import SmallNavLink from "../utils/SmallNavLink";
+
 type MonthlyData = {
   JAN: number;
   FEB: number;
@@ -87,27 +89,21 @@ export default function MonthlyAnalysisPanel({
           </p>
 
           <Chart data={dataMap} />
-          
+
           <p className="text-sm font-bold text-gray-600">{units}</p>
-          <nav className="flex flex-row flex-wrap gap-3 md:gap-1">
-            <Link
-              href="/"
-              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-            >
-              Summary
-            </Link>
-             <Link
-              href="/monthly/"
-              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-            >
-              Bar
-            </Link>
-            <Link
-              href="/monthly/sync-line"
-              className="w-1/3 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-            >
-              Sync-Line
-            </Link>
+          <p>Choose Chart Style</p>
+          <nav className="flex flex-wrap gap-3 md:gap-1">
+            <ul className="flex flex-wrap gap-2">
+              <li>
+                <SmallNavLink href="/monthly">Raw</SmallNavLink>
+              </li>
+              <li>
+                <SmallNavLink href="/monthly/bar-chart">Bar</SmallNavLink>
+              </li>
+              <li>
+                <SmallNavLink href="/monthly/sync-line">Sync-Line</SmallNavLink>
+              </li>
+            </ul>
           </nav>
         </div>
         <div className="flex flex-col text-sm space-y-1">
