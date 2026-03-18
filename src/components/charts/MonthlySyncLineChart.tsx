@@ -56,7 +56,9 @@ export default function MonthlySyncLineChart({
         fill="#fde68a"
         fillOpacity={0.5}
         activeDot={{
-          stroke: "red",
+          stroke: "#92400e",
+          fill: "#f59e0b",
+          r: 4
         }}
       />
     </AreaChart>

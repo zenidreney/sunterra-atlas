@@ -83,15 +83,14 @@ export default function MonthlyAnalysisPanel({
         <p>Longitude: {lng?.toFixed(2)}</p>
       </div>
       <div className="flex flex-col space-y-1 md:space-y-3">
+        <p className="text-sm font-bold text-amber-900/80">
+          Monthly Solar Radiation:
+        </p>
         <div className="flex flex-col bg-white border border-amber-500 rounded-xl px-1 py-2 shadow-xl">
-          <p className="text-sm font-bold text-amber-900/80">
-            Monthly Solar Radiation:
-          </p>
-
           <Chart data={dataMap} />
 
           <p className="text-sm text-gray-600">Units: {units}</p>
-          <p>Choose Chart Style:</p>
+          <p className="mt-1 md:mt-2">Choose Chart Style:</p>
           <nav className="flex flex-wrap gap-3 md:gap-1">
             <ul className="flex flex-wrap gap-2">
               <li>
