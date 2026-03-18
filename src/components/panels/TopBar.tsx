@@ -1,19 +1,15 @@
 "use client";
 
+import type React from "react";
 import { useRef, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getCoordinates, {
   type GetCoordinatesResult,
 } from "@/utils/getCoordinates";
 
-import Link from "next/link";
-
-import { usePathname } from "next/navigation";
+import NavLink from "../utils/NavLink";
 
 export default function TopBar() {
-  
-  const pathname = usePathname()
-  console.log(pathname)
   const [locationData, setLocationData] = useState<
     GetCoordinatesResult[] | null
   >(null);
@@ -22,6 +18,7 @@ export default function TopBar() {
 
   const mapInputRef = useRef<HTMLInputElement>(null);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
+  const [isDropOpen, setIsDropOpen] = useState(false);
 
   const { setLocation } = useLocationContext();
 
@@ -68,7 +65,7 @@ export default function TopBar() {
         type="button"
         key={loc.osm_id}
         onClick={() => handleLocationOptionButton(loc)}
-        className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-amber-500"
+        className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
       >
         {loc.display_name}
       </button>
@@ -78,7 +75,7 @@ export default function TopBar() {
   return (
     <header
       className="flex flex-col items-center gap-3 p-3 
-    bg-linear-to-b from-yellow-50 to-orange-200 shadow-md"
+    bg-linear-to-b from-amber-50 to-orange-100 shadow-md"
     >
       <div className="flex flex-col items-center">
         <h1 className="text-xl md:text-2xl font-bold text-orange-700">
@@ -113,7 +110,7 @@ export default function TopBar() {
         />
         <button
           type="submit"
-          className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-amber-500"
+          className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
         >
           Search
         </button>
@@ -130,31 +127,70 @@ export default function TopBar() {
         </div>
       )}
 
-      <nav>
-        <ul className="flex gap-3">
+      <nav className="flex flex-col gap-2">
+        <ul className="flex justify-center items-center flex-wrap gap-3">
           <li>
-            <Link href="/"
-            className={
-              `rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
-              ${
-                pathname === "/" ? "bg-orange-500" : "text-white hover:bg-orange-500"
-              } 
-              `
-            }
-            >Summary</Link>
+            <NavLink href="/">Home</NavLink>
           </li>
           <li>
-            <Link href="/monthly"
-            className={
-              `rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
-              ${
-                pathname === "/monthly" ? "bg-orange-500" : "text-white hover:bg-orange-500"
-              } 
-              `
-            }
-            >Details</Link>
+            <button
+              type="button"
+              className="min-w-34 rounded-lg bg-red-900 px-2 py-0.5 text-white font-bold hover:bg-red-500 hover:cursor-pointer"
+              onClick={() => setIsDropOpen((prev) => !prev)}
+            >
+              {isDropOpen ? (
+                <div className="py-0.5 flex items-center gap-1 justify-center">
+                  Charts
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                    // className="bi bi-arrow-up-circle"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      // fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"
+                    />
+                  </svg>
+                </div>
+              ) : (
+                <div className="py-0.5 flex items-center gap-1 justify-center">
+                  Charts
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="currentColor"
+                    // className="bi bi-arrow-down-circle"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      // fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
+                    />
+                  </svg>
+                </div>
+              )}
+            </button>
           </li>
         </ul>
+        {isDropOpen && (
+          <ul className="flex flex-col gap-2 items-end">
+            <li>
+              <NavLink href="/monthly">Raw Data</NavLink>
+            </li>
+            <li>
+              <NavLink href="/monthly/bar-chart">Bar Chart</NavLink>
+            </li>
+            <li>
+              <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
+            </li>
+          </ul>
+        )}
       </nav>
     </header>
   );

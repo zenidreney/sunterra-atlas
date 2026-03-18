@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useReverseGeoCode, useSolarData } from "@/app/providers/QueryProvider";
 import { useLocationContext } from "@/context/LocationContext";
-import MonthlyChart from "../charts/MonthlyBarChart";
+
+import SmallNavLink from "../utils/SmallNavLink";
 
 type MonthlyData = {
   JAN: number;
@@ -21,7 +22,15 @@ type MonthlyData = {
   ANN: number;
 };
 
-export default function AnalysisPanel() {
+type ChartComponent = React.ComponentType<{
+  data: { month: string; solarRadiation: number }[];
+}>;
+
+export default function MonthlyAnalysisPanel({
+  Chart,
+}: {
+  Chart: ChartComponent;
+}) {
   const { lat, lng } = useLocationContext();
   const { data, isLoading } = useSolarData(lat, lng);
 
@@ -65,7 +74,7 @@ export default function AnalysisPanel() {
 
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
-      <h2 className="text-xl font-bold text-orange-600">Solar Analysis</h2>
+      <h2 className="text-xl font-bold text-orange-700">Solar Analysis</h2>
 
       <p className="text-sm font-bold">Location:</p>
       <p>{locationName}</p>
@@ -79,14 +88,23 @@ export default function AnalysisPanel() {
             Monthly Solar Radiation:
           </p>
 
-          <MonthlyChart data={dataMap} />
-          <p className="text-sm font-bold text-gray-600">{units}</p>
-          <Link
-            href={"/"}
-            className="w-1/2 bg-orange-500 text-white px-4 py-2 rounded-xl shadow hover:underline"
-          >
-            Back to summary
-          </Link>
+          <Chart data={dataMap} />
+
+          <p className="text-sm text-gray-600">Units: {units}</p>
+          <p>Choose Chart Style:</p>
+          <nav className="flex flex-wrap gap-3 md:gap-1">
+            <ul className="flex flex-wrap gap-2">
+              <li>
+                <SmallNavLink href="/monthly">Raw</SmallNavLink>
+              </li>
+              <li>
+                <SmallNavLink href="/monthly/bar-chart">Bar</SmallNavLink>
+              </li>
+              <li>
+                <SmallNavLink href="/monthly/sync-line">Sync-Line</SmallNavLink>
+              </li>
+            </ul>
+          </nav>
         </div>
         <div className="flex flex-col text-sm space-y-1">
           <p>

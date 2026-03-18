@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bar,
   BarChart,
@@ -8,7 +10,17 @@ import {
   YAxis,
 } from "recharts";
 
-export default function MonthlyChart({
+const common = (
+  <>
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="month" />
+    <YAxis width="auto" />
+    <Tooltip />
+    <Legend />
+  </>
+);
+
+export default function MonthlyBarChart({
   data,
 }: {
   data: { month: string; solarRadiation: number }[];
@@ -30,15 +42,11 @@ export default function MonthlyChart({
         bottom: 5,
       }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="month" />
-      <YAxis width="auto" />
-      <Tooltip />
-      <Legend />
+      {common}
 
       <Bar
         dataKey="solarRadiation"
-        fill="#f59e0b"
+        fill="#f44336"
         activeBar={{ fill: "red", stroke: "orange" }}
         radius={[10, 10, 0, 0]}
       />
