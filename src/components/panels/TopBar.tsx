@@ -135,7 +135,7 @@ export default function TopBar() {
           <li>
             <button
               type="button"
-              className="min-w-34 rounded-lg bg-amber-800 px-2 py-0.5 text-amber-50 font-bold hover:bg-amber-700 active:bg-amber-900 hover:cursor-pointer"
+              className="w-36 rounded-lg bg-amber-800 px-2 py-0.5 text-amber-50 font-bold hover:bg-amber-700 active:bg-amber-900 hover:cursor-pointer"
               onClick={() => setIsDropOpen((prev) => !prev)}
             >
               {isDropOpen ? (

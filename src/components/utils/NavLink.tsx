@@ -16,7 +16,7 @@ export default function NavLink({
     return (
       <Link
         href={href}
-        className={`block min-w-34 text-center rounded-lg  px-2 py-1 text-white font-bold transition-colors
+        className={`block w-36 text-center rounded-lg  px-2 py-1 text-white font-bold transition-colors
               ${
                 pathname === href
                   ? "bg-amber-500"
