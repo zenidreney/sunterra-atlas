@@ -65,7 +65,7 @@ export default function TopBar() {
         type="button"
         key={loc.osm_id}
         onClick={() => handleLocationOptionButton(loc)}
-        className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
+        className="px-4 py-3 border rounded-lg hover:cursor-pointer font-semibold border-amber-600 bg-amber-100 text-amber-900 hover:bg-amber-200"
       >
         {loc.display_name}
       </button>
@@ -75,15 +75,15 @@ export default function TopBar() {
   return (
     <header
       className="flex flex-col items-center gap-3 p-3 
-    bg-linear-to-b from-amber-50 to-orange-100 shadow-md"
+    bg-amber-100 border-b border-amber-800"
     >
       <div className="flex flex-col items-center">
-        <h1 className="text-xl md:text-2xl font-bold text-orange-700">
+        <h1 className="text-xl md:text-2xl font-bold text-amber-800">
           SunTerra Atlas
         </h1>
         <a
           href="https://github.com/zenidreney/sunterra-atlas"
-          className="flex gap-1 text-xs hover:underline hover:bg-orange-100"
+          className="flex gap-1 text-xs hover:underline hover:font-bold"
         >
           Source Code
           <svg
@@ -106,16 +106,16 @@ export default function TopBar() {
           id="map-input"
           type="text"
           placeholder="Enter city or address"
-          className="px-3 py-2 border rounded-lg border-orange-300"
+          className="px-3 py-2 border rounded-lg border-amber-700 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-400"
         />
         <button
           type="submit"
-          className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
+          className="px-4 py-3 border rounded-lg border-amber-700 bg-amber-400 text-amber-950 hover:bg-amber-500 hover:cursor-pointer active:bg-amber-600"
         >
           Search
         </button>
         {isSearchLoading && (
-          <p className="px-4 py-3 border border-orange-900 rounded-lg  bg-orange-900 text-orange-200">
+          <p className="px-4 py-3 border border-amber-800 bg-amber-900/90 text-amber-100 rounded-lg">
             Searching...
           </p>
         )}
@@ -135,7 +135,7 @@ export default function TopBar() {
           <li>
             <button
               type="button"
-              className="min-w-34 rounded-lg bg-red-900 px-2 py-0.5 text-white font-bold hover:bg-red-500 hover:cursor-pointer"
+              className="min-w-34 rounded-lg bg-amber-800 px-2 py-0.5 text-amber-50 font-bold hover:bg-amber-700 active:bg-amber-900 hover:cursor-pointer"
               onClick={() => setIsDropOpen((prev) => !prev)}
             >
               {isDropOpen ? (

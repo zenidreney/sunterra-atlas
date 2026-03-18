@@ -12,10 +12,16 @@ import {
 
 const common = (
   <>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="month" />
-    <YAxis width="auto" />
-    <Tooltip />
+    <CartesianGrid strokeDasharray="4 4" stroke="#ffc400" />
+    <XAxis dataKey="month" stroke="#92400e" />
+    <YAxis width="auto" stroke="#92400e" />
+    <Tooltip
+      contentStyle={{
+        backgroundColor: "#fffbeb",
+        borderColor: "#ff8f00",
+        borderRadius: "16px",
+      }}
+    />
     <Legend />
   </>
 );
@@ -46,8 +52,8 @@ export default function MonthlyBarChart({
 
       <Bar
         dataKey="solarRadiation"
-        fill="#f44336"
-        activeBar={{ fill: "red", stroke: "orange" }}
+        fill="#d97706"
+        activeBar={{ fill: "#fde68a", stroke: "#d97706", fillOpacity: 0.8 }}
         radius={[10, 10, 0, 0]}
       />
     </BarChart>

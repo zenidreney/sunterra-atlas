@@ -11,12 +11,16 @@ import {
 
 const common = (
   <>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="month" stroke="black" />
-    <YAxis stroke="black" width="auto" />
+    <CartesianGrid strokeDasharray="4 4" stroke="#ffc400" />
+    <XAxis dataKey="month" stroke="#92400e" />
+    <YAxis stroke="#92400e" width="auto" />
     <Tooltip
-      cursor={{ stroke: "black" }}
-      contentStyle={{ backgroundColor: "#f59e0b", borderColor: "black" }}
+      cursor={{ stroke: "#ffc400", strokeWidth: 2.5 }}
+      contentStyle={{
+        backgroundColor: "#fffbeb",
+        borderColor: "#ff8f00",
+        borderRadius: "16px",
+      }}
     />
   </>
 );
@@ -48,8 +52,9 @@ export default function MonthlySyncLineChart({
       <Area
         type="monotone"
         dataKey="solarRadiation"
-        stroke="red"
-        fill="red"
+        stroke="#d97706"
+        fill="#fde68a"
+        fillOpacity={0.5}
         activeDot={{
           stroke: "red",
         }}

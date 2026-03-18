@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <LocationContextProvider>
-            <div className="flex flex-col min-h-screen bg-linear-to-b from-yellow-50 to-orange-200">
+            <div className="flex flex-col min-h-screen bg-amber-50">
               <TopBar />
               <main className="flex flex-col gap-3 p-1 md:p-4 md:flex-row-reverse">
                 <div className="w-full md:w-5/12 px-1 md:px-4 rounded-xl ">

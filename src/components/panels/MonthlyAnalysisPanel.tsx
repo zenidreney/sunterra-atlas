@@ -38,7 +38,7 @@ export default function MonthlyAnalysisPanel({
 
   if (isLoading) {
     return (
-      <p className="px-4 py-3 border border-orange-900 rounded-lg  bg-orange-900 text-orange-200">
+      <p className="px-4 py-3 border border-amber-800 bg-amber-900/90 text-amber-100 rounded-lg">
         Searching...
       </p>
     );
@@ -46,7 +46,7 @@ export default function MonthlyAnalysisPanel({
 
   if (!data) {
     return (
-      <p className="text-sm shadow-xl bg-orange-200 p-2 rounded-xl">
+      <p className="bg-amber-100 text-amber-800 border border-amber-200 p-2 rounded-lg">
         Enter a location above or simply click on the map to start
       </p>
     );
@@ -73,8 +73,8 @@ export default function MonthlyAnalysisPanel({
     });
 
   return (
-    <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
-      <h2 className="text-xl font-bold text-orange-700">Solar Analysis</h2>
+    <section className="flex flex-col gap-1 md:gap-2. w-full bg-amber-50 border border-amber-700 shadow-sm rounded-xl p-1 md:p-3">
+      <h2 className="text-xl font-bold text-amber-800">Solar Analysis</h2>
 
       <p className="text-sm font-bold">Location:</p>
       <p>{locationName}</p>
@@ -83,8 +83,8 @@ export default function MonthlyAnalysisPanel({
         <p>Longitude: {lng?.toFixed(2)}</p>
       </div>
       <div className="flex flex-col space-y-1 md:space-y-3">
-        <div className="flex flex-col border rounded-xl px-1 py-2 shadow-xl bg-orange-100">
-          <p className="text-sm font-bold text-gray-600">
+        <div className="flex flex-col bg-white border border-amber-500 rounded-xl px-1 py-2 shadow-xl">
+          <p className="text-sm font-bold text-amber-900/80">
             Monthly Solar Radiation:
           </p>
 

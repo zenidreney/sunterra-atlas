@@ -19,8 +19,8 @@ export default function NavLink({
         className={`block min-w-34 text-center rounded-lg  px-2 py-1 text-white font-bold transition-colors
               ${
                 pathname === href
-                  ? "bg-red-500"
-                  : "text-white bg-red-900 hover:bg-red-500"
+                  ? "bg-amber-500"
+                  : "text-white bg-amber-800 hover:bg-amber-600"
               } 
               `}
       >
