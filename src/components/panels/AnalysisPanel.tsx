@@ -37,7 +37,7 @@ export default function AnalysisPanel() {
 
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-orange-100 rounded-xl shadow-2xl p-1 md:p-3 border border-gray-400">
-      <h2 className="text-xl font-bold text-orange-600">Solar Analysis</h2>
+      <h2 className="text-xl font-bold text-orange-700">Solar Analysis</h2>
       <p className="text-sm font-bold">Location:</p> {locationName}
       <div className=" text-sm flex gap-1">
         <p>Latitude: {lat?.toFixed(2)}</p>
@@ -48,7 +48,7 @@ export default function AnalysisPanel() {
           <p className="text-sm font-bold text-gray-600">
             Annual Solar Radiation:{" "}
           </p>
-          <p className="text-xl md:text-3xl font-bold text-orange-500">
+          <p className="text-xl md:text-3xl font-bold text-orange-700">
             {solarRadiation}
           </p>
           <p>{units} </p>

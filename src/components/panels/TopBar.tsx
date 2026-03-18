@@ -65,7 +65,7 @@ export default function TopBar() {
         type="button"
         key={loc.osm_id}
         onClick={() => handleLocationOptionButton(loc)}
-        className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-amber-500"
+        className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
       >
         {loc.display_name}
       </button>
@@ -75,7 +75,7 @@ export default function TopBar() {
   return (
     <header
       className="flex flex-col items-center gap-3 p-3 
-    bg-linear-to-b from-yellow-50 to-orange-200 shadow-md"
+    bg-linear-to-b from-amber-50 to-orange-100 shadow-md"
     >
       <div className="flex flex-col items-center">
         <h1 className="text-xl md:text-2xl font-bold text-orange-700">
@@ -110,7 +110,7 @@ export default function TopBar() {
         />
         <button
           type="submit"
-          className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-amber-500"
+          className="px-4 py-3 border border-orange-900 rounded-lg hover:cursor-pointer font-semibold bg-orange-300 text-orange-950 hover:bg-orange-500"
         >
           Search
         </button>
@@ -130,23 +130,23 @@ export default function TopBar() {
       <nav className="flex flex-col gap-2">
         <ul className="flex justify-center items-center flex-wrap gap-3">
           <li>
-            <NavLink href="/">Summary</NavLink>
+            <NavLink href="/">Home</NavLink>
           </li>
           <li>
             <button
               type="button"
-              className="rounded-lg bg-amber-800 px-2 py-0.5 text-white font-bold hover:bg-orange-500 hover:cursor-pointer"
+              className="min-w-34 rounded-lg bg-red-900 px-2 py-0.5 text-white font-bold hover:bg-red-500 hover:cursor-pointer"
               onClick={() => setIsDropOpen((prev) => !prev)}
             >
               {isDropOpen ? (
-                <div className="flex items-center gap-1">
-                  Monthly
+                <div className="py-0.5 flex items-center gap-1 justify-center">
+                  Charts
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
                     height="18"
                     fill="currentColor"
-                    className="bi bi-arrow-up-circle"
+                    // className="bi bi-arrow-up-circle"
                     viewBox="0 0 16 16"
                     aria-hidden="true"
                   >
@@ -157,14 +157,14 @@ export default function TopBar() {
                   </svg>
                 </div>
               ) : (
-                <div className="flex items-center gap-1">
-                  Monthly
+                <div className="py-0.5 flex items-center gap-1 justify-center">
+                  Charts
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
                     height="18"
                     fill="currentColor"
-                    className="bi bi-arrow-down-circle"
+                    // className="bi bi-arrow-down-circle"
                     viewBox="0 0 16 16"
                     aria-hidden="true"
                   >

@@ -16,11 +16,11 @@ export default function NavLink({
     return (
       <Link
         href={href}
-        className={`w-4 rounded-lg bg-amber-800 px-2 py-1 text-white font-bold transition-colors
+        className={`block min-w-34 text-center rounded-lg  px-2 py-1 text-white font-bold transition-colors
               ${
                 pathname === href
-                  ? "bg-orange-500"
-                  : "text-white hover:bg-orange-500"
+                  ? "bg-red-500"
+                  : "text-white bg-red-900 hover:bg-red-500"
               } 
               `}
       >

@@ -46,7 +46,7 @@ export default function MonthlyBarChart({
 
       <Bar
         dataKey="solarRadiation"
-        fill="#f59e0b"
+        fill="#f44336"
         activeBar={{ fill: "red", stroke: "orange" }}
         radius={[10, 10, 0, 0]}
       />

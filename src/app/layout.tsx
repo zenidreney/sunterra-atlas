@@ -25,7 +25,7 @@ export default function RootLayout({
             <div className="flex flex-col min-h-screen bg-linear-to-b from-yellow-50 to-orange-200">
               <TopBar />
               <main className="flex flex-col gap-3 p-1 md:p-4 md:flex-row-reverse">
-                <div className="w-full md:w-5/12 bg-white/90 px-1 md:px-4 py-2 rounded-xl">
+                <div className="w-full md:w-5/12 px-1 md:px-4 rounded-xl ">
                   {children}
                 </div>
                 <div className="w-full md:w-7/12 h-auto max-h-[76vh] px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
