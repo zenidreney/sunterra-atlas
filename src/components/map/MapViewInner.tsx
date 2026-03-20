@@ -53,6 +53,7 @@ function MapClickHandler() {
         console.log("fetch not allowed");
         return;
       }
+      lastCall.current = now
       console.log("fetch allowed");
       setLocation(e.latlng.lat, e.latlng.lng);
     },
