@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   MapContainer,
   Marker,
@@ -38,8 +38,22 @@ function CenterMap({ lat, lng }: CenterMapProps) {
 function MapClickHandler() {
   const { setLocation } = useLocationContext();
 
+  const lastCall = useRef(0);
+  const now = Date.now();
+
+  const diff = now - lastCall.current;
+
+  console.log(`diff: ${diff}ms`);
+
+
+
   useMapEvents({
     click(e) {
+      if (now - lastCall.current < 500) {
+        console.log("fetch not allowed");
+        return;
+      }
+      console.log("fetch allowed");
       setLocation(e.latlng.lat, e.latlng.lng);
     },
   });
