@@ -10,10 +10,13 @@ import {
   LayersControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useMapEvents } from "react-leaflet";
+import { useMapEvents, Circle } from "react-leaflet";
 import { useLocationContext } from "@/context/LocationContext";
 
 import { setupLeafletIcons } from "@/lib/leaflet";
+
+import { useSolarData } from "@/app/providers/QueryProvider";
+import getSolarColor from "@/utils/getSolarColor";
 
 setupLeafletIcons();
 
@@ -39,22 +42,19 @@ function MapClickHandler() {
   const { setLocation } = useLocationContext();
 
   const lastCall = useRef(0);
-  
-  
-  
-  
+
   useMapEvents({
     click(e) {
       const now = Date.now();
       const diff = now - lastCall.current;
-    
+
       console.log(now, `diff: ${diff}ms`);
       if (now - lastCall.current < 500) {
-        console.log("fetch not allowed");
+        console.error("Too short time between fetch requests. Fetch now allowed")
         return;
       }
-      lastCall.current = now
-      console.log("fetch allowed");
+      lastCall.current = now;
+      // console.log("fetch allowed");
       setLocation(e.latlng.lat, e.latlng.lng);
     },
   });
@@ -63,6 +63,12 @@ function MapClickHandler() {
 
 export default function MapViewInner() {
   const { lat, lng } = useLocationContext();
+  const { data } = useSolarData(lat, lng);
+
+  const annualRadiation =
+    data?.properties?.parameter?.ALLSKY_SFC_SW_DWN?.ANN ?? null;
+
+  const solarColor = getSolarColor(annualRadiation);
 
   return (
     <div className="h-[76vh] w-full">
@@ -72,6 +78,18 @@ export default function MapViewInner() {
         scrollWheelZoom
         className="h-full w-full"
       >
+        {lat && lng && (
+          <Circle
+            center={[lat, lng]}
+            radius={annualRadiation * 25000}
+            pathOptions={{
+              color: solarColor,
+              fillColor: solarColor,
+              fillOpacity: 0.4,
+            }}
+          />
+        )}
+
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Standard OSM">
             <TileLayer

@@ -1,15 +1,17 @@
 "use client";
 
+import getSolarColor from "@/utils/getSolarColor";
+
 export default function RawTable({
   data,
 }: {
   data: { month: string; solarRadiation: number }[];
 }) {
   const dataElement = data.map(({ month, solarRadiation }) => {
-    console.log(month);
-
     const maxRadiation = Math.max(...data.map((value) => value.solarRadiation));
-    console.log(maxRadiation);
+
+    const solarColor = getSolarColor(solarRadiation);
+    console.log(solarColor);
 
     return (
       <tr key={month} className="border-t border-amber-700">
@@ -19,8 +21,12 @@ export default function RawTable({
         </td>
         <td className="px-2 py-1">
           <div
-            className="h-2 bg-amber-400 rounded-xl"
-            style={{ width: `${(solarRadiation / maxRadiation) * 100}%` }}
+            className="h-2 rounded-xl"
+            style={{
+              width: `${(solarRadiation / maxRadiation) * 100}%`,
+              backgroundColor: solarColor,
+
+            }}
           ></div>
         </td>
       </tr>
@@ -35,7 +41,9 @@ export default function RawTable({
           <th className="text-left px-2 py-1 font-bold">
             Solar Radiation<span className="block text-xs"> (kWh/m²/day)</span>
           </th>
-          <th className="text-left px-2 py-1 font-bold">Relative Intensity <span className="block text-xs">% of Max</span></th>
+          <th className="text-left px-2 py-1 font-bold">
+            Relative Intensity <span className="block text-xs">% of Max</span>
+          </th>
         </tr>
       </thead>
       <tbody>{dataElement}</tbody>
