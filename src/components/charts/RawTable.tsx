@@ -4,8 +4,10 @@ import getSolarColor from "@/utils/getSolarColor";
 
 export default function RawTable({
   data,
+  annualRadiation
 }: {
   data: { month: string; solarRadiation: number }[];
+  annualRadiation: number
 }) {
   const dataElement = data.map(({ month, solarRadiation }) => {
     const maxRadiation = Math.max(...data.map((value) => value.solarRadiation));
@@ -34,6 +36,7 @@ export default function RawTable({
   });
 
   return (
+    <section>
     <table className="text-sm">
       <thead>
         <tr className="bg-amber-100 text-amber-900 align-top">
@@ -48,5 +51,8 @@ export default function RawTable({
       </thead>
       <tbody>{dataElement}</tbody>
     </table>
+    <p className="bg-amber-100 text-amber-900 align-top my-3 ml-1">Annual Radiation: {annualRadiation.toFixed(2)} </p>
+    
+    </section>
   );
 }
