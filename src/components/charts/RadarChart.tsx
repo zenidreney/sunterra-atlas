@@ -56,7 +56,7 @@ export default function RadarChartComponent({
       <Radar
         name="Solar Radiation"
         dataKey="solarRadiation"
-        stroke="#92400e"
+        stroke="red"
         fill="#f59e0b"
         fillOpacity={0.6}
       />
