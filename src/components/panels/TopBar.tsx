@@ -189,6 +189,9 @@ export default function TopBar() {
             <li>
               <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
             </li>
+            <li>
+              <NavLink href="/monthly/radar-chart">Radar Chart</NavLink>
+            </li>
           </ul>
         )}
       </nav>

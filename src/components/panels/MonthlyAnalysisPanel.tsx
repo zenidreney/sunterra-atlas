@@ -104,6 +104,9 @@ export default function MonthlyAnalysisPanel({
               <li>
                 <SmallNavLink href="/monthly/sync-line">Sync-Line</SmallNavLink>
               </li>
+              <li>
+                <SmallNavLink href="/monthly/radar-chart">Radar</SmallNavLink>
+              </li>
             </ul>
           </nav>
         </div>
