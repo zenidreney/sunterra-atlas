@@ -5,6 +5,7 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
+  ReferenceLine,
   Tooltip,
   XAxis,
   YAxis,
@@ -28,8 +29,10 @@ const common = (
 
 export default function MonthlyBarChart({
   data,
+  annualRadiation,
 }: {
   data: { month: string; solarRadiation: number }[];
+  annualRadiation: number;
 }) {
   return (
     <BarChart
@@ -55,6 +58,16 @@ export default function MonthlyBarChart({
         fill="#d97706"
         activeBar={{ fill: "#fde68a", stroke: "#d97706", fillOpacity: 0.8 }}
         radius={[10, 10, 0, 0]}
+      />
+      <ReferenceLine
+        y={annualRadiation}
+        label={{
+          value: "Average",
+          fill: "#92400e",
+          position: "insideBottomRight",
+        }}
+        stroke="red"
+        strokeDasharray="4 4"
       />
     </BarChart>
   );

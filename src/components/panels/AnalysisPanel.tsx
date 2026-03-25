@@ -6,7 +6,7 @@ import { useLocationContext } from "@/context/LocationContext";
 
 export default function AnalysisPanel() {
   const { lat, lng } = useLocationContext();
-  const { data, isLoading, status } = useSolarData(lat, lng);
+  const { data, isLoading } = useSolarData(lat, lng);
 
   // console.log(data, isLoading, status)
   const { data: locationData } = useReverseGeoCode(lat, lng);

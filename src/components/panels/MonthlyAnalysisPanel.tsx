@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useReverseGeoCode, useSolarData } from "@/app/providers/QueryProvider";
 import { useLocationContext } from "@/context/LocationContext";
 
@@ -24,6 +23,7 @@ type MonthlyData = {
 
 type ChartComponent = React.ComponentType<{
   data: { month: string; solarRadiation: number }[];
+  annualRadiation: number
 }>;
 
 export default function MonthlyAnalysisPanel({
@@ -72,6 +72,8 @@ export default function MonthlyAnalysisPanel({
       };
     });
 
+  const annualRadiation = data.properties.parameter.ALLSKY_SFC_SW_DWN.ANN;
+
   return (
     <section className="flex flex-col gap-1 md:gap-2. w-full bg-amber-50 border border-amber-700 shadow-sm rounded-xl p-1 md:p-3">
       <h2 className="text-xl font-bold text-amber-800">Solar Analysis</h2>
@@ -87,7 +89,7 @@ export default function MonthlyAnalysisPanel({
           Monthly Solar Radiation:
         </p>
         <div className="flex flex-col bg-white border border-amber-500 rounded-xl px-1 py-2 shadow-xl">
-          <Chart data={dataMap} />
+          <Chart data={dataMap} annualRadiation={annualRadiation}/>
 
           <p className="text-sm text-gray-600">Units: {units}</p>
           <p className="mt-1 md:mt-2">Choose Chart Style:</p>

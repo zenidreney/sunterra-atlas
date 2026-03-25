@@ -4,6 +4,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  ReferenceLine,
   Tooltip,
   XAxis,
   YAxis,
@@ -27,8 +28,10 @@ const common = (
 
 export default function MonthlySyncLineChart({
   data,
+  annualRadiation,
 }: {
   data: { month: string; solarRadiation: number }[];
+  annualRadiation: number;
 }) {
   return (
     <AreaChart
@@ -58,8 +61,18 @@ export default function MonthlySyncLineChart({
         activeDot={{
           stroke: "#92400e",
           fill: "#f59e0b",
-          r: 4
+          r: 4,
         }}
+      />
+      <ReferenceLine
+        y={annualRadiation}
+        label={{
+          value: "Average",
+          fill: "#92400e",
+          position: "insideBottomRight",
+        }}
+        stroke="red"
+        strokeDasharray="4 4"
       />
     </AreaChart>
   );
