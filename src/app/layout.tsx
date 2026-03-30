@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MapView from "@/components/map/MapView";
+import Footer from "@/components/panels/Footer";
 import TopBar from "@/components/panels/TopBar";
 import { LocationContextProvider } from "@/context/LocationContext";
 import { QueryProvider } from "./providers/QueryProvider";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "SunTerra Atlas",
@@ -32,6 +33,7 @@ export default function RootLayout({
                   <MapView />
                 </div>
               </main>
+              <Footer />
             </div>
           </LocationContextProvider>
           <ReactQueryDevtools initialIsOpen={false} />
