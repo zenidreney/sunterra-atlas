@@ -25,11 +25,11 @@ export default function RootLayout({
           <LocationContextProvider>
             <div className="flex flex-col min-h-screen bg-amber-50">
               <TopBar />
-              <main className="flex flex-col gap-3 p-1 md:p-4 md:flex-row-reverse">
+              <main className="flex flex-col grow gap-3 p-1 md:p-4 md:flex-row-reverse">
                 <div className="w-full md:w-5/12 px-1 md:px-4 rounded-xl ">
                   {children}
                 </div>
-                <div className="w-full md:w-7/12 h-auto max-h-[76vh] px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
+                <div className="w-full md:w-7/12 h-[50vh] md:h-auto px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
                   <MapView />
                 </div>
               </main>
