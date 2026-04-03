@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer
-      className="py-5 
+      className="py-2 sm:py-5 
     bg-amber-100 border-t border-amber-800 text-center"
     >
       <p>
