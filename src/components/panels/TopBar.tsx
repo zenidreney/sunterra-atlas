@@ -75,7 +75,7 @@ export default function TopBar() {
   return (
     <header
       className="flex flex-col items-center gap-3 p-3 
-    bg-amber-100 border-b border-amber-800"
+    bg-amber-100 border-b border-amber-800 position:relative"
     >
       <div className="flex flex-col items-center">
         <h1 className="text-xl md:text-2xl font-bold text-amber-800">
@@ -143,17 +143,15 @@ export default function TopBar() {
                   Charts
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
+                    width="20"
+                    height="20"
                     fill="currentColor"
-                    // className="bi bi-arrow-up-circle"
+                    // className="bi bi-x-circle"
                     viewBox="0 0 16 16"
                     aria-hidden="true"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"
-                    />
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                   </svg>
                 </div>
               ) : (
@@ -179,20 +177,43 @@ export default function TopBar() {
           </li>
         </ul>
         {isDropOpen && (
-          <ul className="flex flex-col gap-2 items-end">
-            <li>
-              <NavLink href="/monthly">Raw Data</NavLink>
-            </li>
-            <li>
-              <NavLink href="/monthly/bar-chart">Bar Chart</NavLink>
-            </li>
-            <li>
-              <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
-            </li>
-            <li>
-              <NavLink href="/monthly/radar-chart">Radar Chart</NavLink>
-            </li>
-          </ul>
+          <nav className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative border-r border-amber-700">
+            <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
+              <li className="hidden md:block absolute top-0 left-4">
+                <button
+                  className="flex justify-between w-25 items-center px-2 py-1 mt-8 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
+                  type="button"
+                  onClick={() => setIsDropOpen(false)}
+                >
+                  Close
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    // className="bi bi-x-circle"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <NavLink href="/monthly">Raw Data</NavLink>
+              </li>
+              <li>
+                <NavLink href="/monthly/bar-chart">Bar Chart</NavLink>
+              </li>
+              <li>
+                <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
+              </li>
+              <li>
+                <NavLink href="/monthly/radar-chart">Radar Chart</NavLink>
+              </li>
+            </ul>
+          </nav>
         )}
       </nav>
     </header>
