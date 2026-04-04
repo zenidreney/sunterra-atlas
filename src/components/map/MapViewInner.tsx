@@ -71,7 +71,7 @@ export default function MapViewInner() {
   const solarColor = getSolarColor(annualRadiation);
 
   return (
-    <div className=" z-0 h-[45vh] sm:h-full w-full">
+    <div className="h-[45vh] sm:h-full w-full">
       <MapContainer
         center={[40.4168, -3.7038]} // Madrid
         zoom={5.5}

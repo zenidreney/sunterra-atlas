@@ -1,12 +1,13 @@
 "use client";
 
+
+import Link from "next/link";
 import type React from "react";
 import { useRef, useState } from "react";
 import { useLocationContext } from "@/context/LocationContext";
 import getCoordinates, {
   type GetCoordinatesResult,
 } from "@/utils/getCoordinates";
-
 import NavLink from "../utils/NavLink";
 
 export default function TopBar() {
@@ -75,13 +76,13 @@ export default function TopBar() {
   return (
     <header
       className="flex flex-col items-center gap-3 p-3 
-    bg-amber-100 border-b border-amber-800 position:relative"
+    bg-amber-100 border-b border-amber-800 relative"
     >
       <div className="flex flex-col items-center">
         <h1 className="text-xl md:text-2xl font-bold text-amber-800">
-          <a href="/">SunTerra Atlas</a>
+          <Link href="/">SunTerra Atlas</Link>
         </h1>
-        <a
+        <Link
           href="https://github.com/zenidreney/sunterra-atlas"
           className="flex gap-1 text-xs hover:underline hover:font-bold"
         >
@@ -97,7 +98,7 @@ export default function TopBar() {
           >
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
           </svg>
-        </a>
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2">
@@ -127,7 +128,7 @@ export default function TopBar() {
         </div>
       )}
 
-      <nav className="flex flex-col gap-2">
+      <nav aria-label="Main navigation" className="flex flex-col gap-2">
         <ul className="flex justify-center items-center flex-wrap gap-3">
           <li>
             <NavLink href="/">Home</NavLink>
@@ -176,8 +177,9 @@ export default function TopBar() {
             </button>
           </li>
         </ul>
+        </nav>
         {isDropOpen && (
-          <nav className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative md:border-r border-amber-700">
+          <nav aria-label="Charts navigation" className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative md:border-r border-amber-700">
             <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
               <li className="hidden md:block absolute top-0 left-4">
                 <button
@@ -215,7 +217,7 @@ export default function TopBar() {
             </ul>
           </nav>
         )}
-      </nav>
+      
     </header>
   );
 }
