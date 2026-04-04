@@ -79,7 +79,7 @@ export default function TopBar() {
     >
       <div className="flex flex-col items-center">
         <h1 className="text-xl md:text-2xl font-bold text-amber-800">
-          SunTerra Atlas
+          <a href="/">SunTerra Atlas</a>
         </h1>
         <a
           href="https://github.com/zenidreney/sunterra-atlas"
@@ -177,7 +177,7 @@ export default function TopBar() {
           </li>
         </ul>
         {isDropOpen && (
-          <nav className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative border-r border-amber-700">
+          <nav className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative md:border-r border-amber-700">
             <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
               <li className="hidden md:block absolute top-0 left-4">
                 <button
