@@ -29,7 +29,7 @@ export default function RootLayout({
                 <div className="w-full md:w-5/12 px-1 md:px-4 rounded-xl ">
                   {children}
                 </div>
-                <div className="w-full md:w-7/12 md:h-auto px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
+                <div className="w-full h-full md:w-7/12 md:h-auto px-3 md:px-0 rounded-xl overflow-hidden shadow-lg ">
                   <MapView />
                 </div>
               </main>
