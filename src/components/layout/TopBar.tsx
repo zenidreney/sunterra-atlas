@@ -1,9 +1,9 @@
 "use client";
 
-
 import Link from "next/link";
 import type React from "react";
 import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLocationContext } from "@/context/LocationContext";
 import getCoordinates, {
   type GetCoordinatesResult,
@@ -20,6 +20,7 @@ export default function TopBar() {
   const mapInputRef = useRef<HTMLInputElement>(null);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isDropOpen, setIsDropOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   const { setLocation } = useLocationContext();
 
@@ -78,27 +79,17 @@ export default function TopBar() {
       className="flex flex-col items-center gap-3 p-3 
     bg-amber-100 border-b border-amber-800 relative"
     >
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-1 items-center">
         <h1 className="text-xl md:text-2xl font-bold text-amber-800">
           <Link href="/">SunTerra Atlas</Link>
         </h1>
-        <Link
-          href="https://github.com/zenidreney/sunterra-atlas"
-          className="flex gap-1 text-xs hover:underline hover:font-bold"
+        <button
+          type="button"
+          onClick={() => setIsAboutOpen((prev) => !prev)}
+          className="w-25 text-center text-sm px-1 py-0.3 bg-amber-100 border border-amber-800 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
         >
-          Source Code
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-github"
-            viewBox="0 0 16 16"
-            aria-hidden="true"
-          >
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-          </svg>
-        </Link>
+          About
+        </button>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2">
@@ -177,47 +168,117 @@ export default function TopBar() {
             </button>
           </li>
         </ul>
-        </nav>
-        {isDropOpen && (
-          <nav aria-label="Charts navigation" className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9999 top-0 left-0 relative md:border-r border-amber-700">
-            <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
-              <li className="hidden md:block absolute top-0 left-4">
-                <button
-                  className="flex justify-between w-25 items-center px-2 py-1 mt-8 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
-                  type="button"
-                  onClick={() => setIsDropOpen(false)}
+      </nav>
+      {isDropOpen && (
+        <nav
+          aria-label="Charts navigation"
+          className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9996 top-0 left-0 relative md:border-r border-amber-700"
+        >
+          <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
+            <li className="hidden md:block absolute top-0 left-4">
+              <button
+                className="flex justify-between w-25 items-center px-2 py-1 mt-8 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
+                type="button"
+                onClick={() => setIsDropOpen(false)}
+              >
+                Close
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  // className="bi bi-x-circle"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
                 >
-                  Close
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                </svg>
+              </button>
+            </li>
+            <li>
+              <NavLink href="/monthly">Raw Data</NavLink>
+            </li>
+            <li>
+              <NavLink href="/monthly/bar-chart">Bar Chart</NavLink>
+            </li>
+            <li>
+              <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
+            </li>
+            <li>
+              <NavLink href="/monthly/radar-chart">Radar Chart</NavLink>
+            </li>
+          </ul>
+        </nav>
+      )}
+
+      {isAboutOpen &&
+        createPortal(
+          <div className="fixed flex items-center justify-center z-9999 inset-0">
+            <button
+              type="button"
+              className="fixed inset-0 z-9997 backdrop-blur-xs"
+              onClick={() => setIsAboutOpen(false)}
+            />
+            <div className="z-9998 gap-2 flex flex-col overflow-y-auto max-h-[90vh] w-11/12 md:w-2/3 bg-amber-800 px-3 py-4 rounded-xl border border-amber-800 text-amber-50">
+              <div className="flex items-center justify-between">
+                <h1 className= "text-2xl font-bold">ABOUT</h1>
+                <button
+                  type="button"
+                  className="px-2 py-1 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
+                  onClick={() => setIsAboutOpen(false)}
+                >
+                  Close X
+                </button>
+              </div>
+              <h2>Geospatial Solar Potential Intelligence Platform</h2>
+              <p>
+                <strong>SunTerra Atlas</strong> is a geospatial solar potential
+                intelligence platform that allows users to explore solar
+                radiation data interactively across the globe.
+              </p>
+              <p>
+                Built with <strong>Next.js (App Router)</strong>,{" "}
+                <strong>React</strong>, and <strong>TypeScript</strong>, the app
+                leverages <strong>React Query</strong> for efficient data
+                fetching and caching, and <strong>React Leaflet</strong> for
+                dynamic, map-based visualization.
+              </p>
+              <p>
+                Users can search for any location or click directly on the map
+                to retrieve solar radiation insights, which are then visualized
+                through map overlays and chart-based views.
+              </p>
+              <p>
+                To use the app, simply enter a city or address in the search bar
+                or click anywhere on the map to analyze solar potential for that
+                location. You can then explore different chart views for deeper
+                insights.
+              </p>
+              <p>
+                View the full source code on GitHub:
+                <Link
+                  href="https://github.com/zenidreney/sunterra-atlas"
+                  className="flex items-center  gap-2  my-2 underline hover:font-bold"
+                >
+                  SunTerra-Atlas Repo
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     fill="currentColor"
-                    // className="bi bi-x-circle"
+                    className="inline-block"
                     viewBox="0 0 16 16"
                     aria-hidden="true"
                   >
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
                   </svg>
-                </button>
-              </li>
-              <li>
-                <NavLink href="/monthly">Raw Data</NavLink>
-              </li>
-              <li>
-                <NavLink href="/monthly/bar-chart">Bar Chart</NavLink>
-              </li>
-              <li>
-                <NavLink href="/monthly/sync-line">Sync-Line Chart</NavLink>
-              </li>
-              <li>
-                <NavLink href="/monthly/radar-chart">Radar Chart</NavLink>
-              </li>
-            </ul>
-          </nav>
+                </Link>
+              </p>
+            </div>
+          </div>,
+          document.body,
         )}
-      
     </header>
   );
 }
