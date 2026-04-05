@@ -21,7 +21,7 @@ export default function AnalysisPanel() {
 
   if (!data) {
     return (
-      <p className="bg-amber-100 text-amber-800 border border-amber-200 p-2 rounded-lg">
+      <p className="bg-amber-100 text-amber-800 text-center md:text-left border border-amber-200 p-2 rounded-lg">
         Enter a location above or simply click on the map to start
       </p>
     );
