@@ -175,7 +175,7 @@ export default function TopBar() {
           className="flex justify-center md:fixed md:h-full md:bg-amber-700/60 z-9996 top-0 left-0 relative md:border-r border-amber-700"
         >
           <ul className="flex flex-col gap-2 items-end md:justify-center md:gap-8   md:p-6 ">
-            <li className="hidden md:block absolute top-0 left-4">
+            <li className="hidden md:block absolute top-0 right-4">
               <button
                 className="flex justify-between w-25 items-center px-2 py-1 mt-8 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
                 type="button"
@@ -231,7 +231,6 @@ export default function TopBar() {
                   Close X
                 </button>
               </div>
-              <h2>Geospatial Solar Potential Intelligence Platform</h2>
               <p>
                 <strong>SunTerra Atlas</strong> is a geospatial solar potential
                 intelligence platform that allows users to explore solar
