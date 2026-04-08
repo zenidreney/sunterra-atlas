@@ -127,7 +127,7 @@ export default function TopBar() {
           <li>
             <button
               type="button"
-              className="w-36 rounded-lg bg-amber-800 px-2 py-0.5 text-amber-50 font-bold hover:bg-amber-700 active:bg-amber-900 hover:cursor-pointer"
+              className="relative w-36 rounded-lg bg-amber-800 px-2 py-0.5 text-amber-50 font-bold hover:bg-amber-700 active:bg-amber-900 hover:cursor-pointer"
               onClick={() => setIsDropOpen((prev) => !prev)}
             >
               {isDropOpen ? (
@@ -138,7 +138,7 @@ export default function TopBar() {
                     width="20"
                     height="20"
                     fill="currentColor"
-                    // className="bi bi-x-circle"
+                    className="absolute right-2"
                     viewBox="0 0 16 16"
                     aria-hidden="true"
                   >
@@ -149,20 +149,6 @@ export default function TopBar() {
               ) : (
                 <div className="py-0.5 flex items-center gap-1 justify-center">
                   Charts
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    fill="currentColor"
-                    // className="bi bi-arrow-down-circle"
-                    viewBox="0 0 16 16"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"
-                    />
-                  </svg>
                 </div>
               )}
             </button>
@@ -222,7 +208,7 @@ export default function TopBar() {
             />
             <div className="z-9998 gap-2 flex flex-col overflow-y-auto max-h-[90vh] w-11/12 md:w-2/3 bg-amber-800 px-3 py-4 rounded-xl border border-amber-800 text-amber-50">
               <div className="flex items-center justify-between">
-                <h1 className= "text-2xl font-bold">ABOUT</h1>
+                <h1 className="text-2xl font-bold">ABOUT</h1>
                 <button
                   type="button"
                   className="px-2 py-1 bg-amber-50 border border-amber-400 rounded-xl text-amber-700 hover:bg-amber-700 hover:text-amber-50 cursor-pointer"
