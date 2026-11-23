@@ -16,63 +16,74 @@ export default function RawTable({
     const monthlySolarColor = getSolarColor(solarRadiation);
 
     return (
-      <tr key={month} className="border-t border-amber-700">
-        <td className="px-2 py-1 text-amber-900">{month}</td>
-        <td className="px-2 py-1 tabular-nums text-amber-800">
+      <tr
+        key={month}
+        className="border-t border-stone-100 transition-colors hover:bg-amber-50/60"
+      >
+        <td className="px-3 py-2.5 font-semibold text-stone-700">{month}</td>
+        <td className="px-3 py-2.5 text-right font-medium text-stone-800 tabular-nums">
           {solarRadiation.toFixed(2)}
         </td>
-        <td className="px-2 py-1">
-          <div
-            className="h-2 rounded-xl"
-            style={{
-              width: `${(solarRadiation / maxRadiation) * 100}%`,
-              backgroundColor: monthlySolarColor,
-            }}
-          ></div>
+        <td className="min-w-36 px-3 py-2.5">
+          <div className="h-2 overflow-hidden rounded-full bg-stone-100">
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${(solarRadiation / maxRadiation) * 100}%`,
+                backgroundColor: monthlySolarColor,
+              }}
+            />
+          </div>
         </td>
       </tr>
     );
   });
 
   return (
-    <section>
-      <table className="text-sm">
+    <section className="overflow-x-auto">
+      <table className="w-full min-w-[460px] text-sm">
         <thead>
-          <tr className="bg-amber-100 text-amber-900 align-top">
-            <th className="text-left px-2 py-1 font-semibold">Month</th>
-            <th className="text-left px-2 py-1 font-bold">
+          <tr className="bg-stone-100/80 align-top text-[0.68rem] tracking-wide text-stone-500 uppercase">
+            <th className="px-3 py-3 text-left font-bold">Month</th>
+            <th className="px-3 py-3 text-right font-bold">
               Solar Radiation
-              <span className="block text-xs"> (kWh/m²/day)</span>
+              <span className="block text-[0.6rem] font-medium normal-case">
+                kWh/m²/day
+              </span>
             </th>
-            <th className="text-left px-2 py-1 font-bold">
-              Relative Intensity <span className="block text-xs">% of Max</span>
+            <th className="px-3 py-3 text-left font-bold">
+              Relative intensity
+              <span className="block text-[0.6rem] font-medium normal-case">
+                % of maximum
+              </span>
             </th>
           </tr>
         </thead>
         <tbody>{monthlyRadiationArray}</tbody>
 
         <tfoot>
-          <tr key={annualRadiation} className="border-t-2 border-amber-900 bg-amber-100">
-            <td className="px-2 py-3 font-medium text-lg text-amber-900">
-              Average
-            </td>
-            <td className="px-2 py-3 tabular-nums text-amber-800 text-lg">
+          <tr
+            key={annualRadiation}
+            className="border-t border-amber-200 bg-amber-50"
+          >
+            <td className="px-3 py-3 font-bold text-stone-900">Average</td>
+            <td className="px-3 py-3 text-right font-bold text-amber-800 tabular-nums">
               {annualRadiation.toFixed(2)}
             </td>
-            <td className="px-2 py-1">
-              <div
-                className="h-4 rounded-xl border border-amber-500"
-                style={{
-                  width: `${(annualRadiation / maxRadiation) * 100}%`,
-                  backgroundColor: averageRadiatonColor,
-                }}
-              ></div>
+            <td className="px-3 py-3">
+              <div className="h-2 overflow-hidden rounded-full bg-amber-100">
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${(annualRadiation / maxRadiation) * 100}%`,
+                    backgroundColor: averageRadiatonColor,
+                  }}
+                />
+              </div>
             </td>
           </tr>
         </tfoot>
-
       </table>
-     
     </section>
   );
 }

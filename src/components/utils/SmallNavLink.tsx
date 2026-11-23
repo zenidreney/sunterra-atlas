@@ -13,11 +13,11 @@ export default function NavLink({
   return (
     <Link
       href={href}
-      className={`rounded-lg  px-2 py-0.5 font-bold transition-colors text-sm
+      className={`inline-flex rounded-lg px-3 py-1.5 text-xs font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500
               ${
                 pathname === href
-                  ? "bg-amber-500 text-white"
-                  : "bg-amber-100 text-amber-800 hover:bg-amber-200"
+                  ? "bg-stone-900 text-white shadow-sm"
+                  : "text-stone-600 hover:bg-white hover:text-stone-950"
               } 
               `}
     >

@@ -4,20 +4,23 @@ import { usePathname } from "next/navigation";
 export default function NavLink({
   href,
   children,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }) {
   const pathname = usePathname();
 
   return (
     <Link
       href={href}
-      className={`block w-36 text-center rounded-lg  px-2 py-1 text-white font-bold transition-colors
+      onClick={onClick}
+      className={`block rounded-xl px-3 py-2 text-center text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2
               ${
                 pathname === href
-                  ? "bg-amber-500"
-                  : "text-white bg-amber-800 hover:bg-amber-600"
+                  ? "bg-stone-900 text-white shadow-sm"
+                  : "text-stone-600 hover:bg-stone-100 hover:text-stone-950"
               } 
               `}
     >

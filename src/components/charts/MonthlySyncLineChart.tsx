@@ -12,15 +12,16 @@ import {
 
 const common = (
   <>
-    <CartesianGrid strokeDasharray="4 4" stroke="#ffc400" />
-    <XAxis dataKey="month" stroke="#92400e" />
-    <YAxis stroke="#92400e" width="auto" />
+    <CartesianGrid vertical={false} strokeDasharray="4 4" stroke="#e7e5e4" />
+    <XAxis dataKey="month" stroke="#78716c" tickLine={false} axisLine={false} />
+    <YAxis stroke="#78716c" width="auto" tickLine={false} axisLine={false} />
     <Tooltip
-      cursor={{ stroke: "#ffc400", strokeWidth: 2.5 }}
+      cursor={{ stroke: "#f59e0b", strokeWidth: 1.5 }}
       contentStyle={{
-        backgroundColor: "#fffbeb",
-        borderColor: "#ff8f00",
-        borderRadius: "16px",
+        backgroundColor: "#ffffff",
+        borderColor: "#e7e5e4",
+        borderRadius: "12px",
+        boxShadow: "0 12px 30px rgba(28, 25, 23, 0.12)",
       }}
     />
   </>
@@ -38,40 +39,42 @@ export default function MonthlySyncLineChart({
       style={{
         width: "100%",
         maxWidth: "700px",
-        maxHeight: "20vh",
-        aspectRatio: 1.618,
+        height: "260px",
       }}
       responsive
       data={data}
       syncId="anyId"
       margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0,
+        top: 16,
+        right: 18,
+        left: 4,
+        bottom: 8,
       }}
     >
       {common}
       <Area
         type="monotone"
         dataKey="solarRadiation"
+        name="Solar radiation"
         stroke="#d97706"
-        fill="#fde68a"
-        fillOpacity={0.5}
+        strokeWidth={2.5}
+        fill="#fbbf24"
+        fillOpacity={0.28}
         activeDot={{
-          stroke: "#92400e",
-          fill: "#f59e0b",
-          r: 4,
+          stroke: "#ffffff",
+          strokeWidth: 2,
+          fill: "#d97706",
+          r: 5,
         }}
       />
       <ReferenceLine
         y={annualRadiation}
         label={{
           value: "Average",
-          fill: "#92400e",
+          fill: "#15803d",
           position: "insideBottomRight",
         }}
-        stroke="red"
+        stroke="#15803d"
         strokeDasharray="4 4"
       />
     </AreaChart>

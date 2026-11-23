@@ -2,20 +2,18 @@
 
 import { useEffect, useRef } from "react";
 import {
+  LayersControl,
   MapContainer,
   Marker,
   Popup,
   TileLayer,
   useMap,
-  LayersControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useMapEvents, Circle } from "react-leaflet";
-import { useLocationContext } from "@/context/LocationContext";
-
-import { setupLeafletIcons } from "@/lib/leaflet";
-
+import { Circle, useMapEvents } from "react-leaflet";
 import { useSolarData } from "@/app/providers/QueryProvider";
+import { useLocationContext } from "@/context/LocationContext";
+import { setupLeafletIcons } from "@/lib/leaflet";
 import getSolarColor from "@/utils/getSolarColor";
 
 setupLeafletIcons();
@@ -50,7 +48,9 @@ function MapClickHandler() {
 
       console.log(now, `diff: ${diff}ms`);
       if (now - lastCall.current < 500) {
-        console.error("Too short time between fetch requests. Fetch not allowed")
+        console.error(
+          "Too short time between fetch requests. Fetch not allowed",
+        );
         return;
       }
       lastCall.current = now;
@@ -71,7 +71,11 @@ export default function MapViewInner() {
   const solarColor = getSolarColor(annualRadiation);
 
   return (
-    <div className="h-[45vh] md:h-full w-full">
+    <div className="relative h-[52vh] w-full md:h-full">
+      <div className="pointer-events-none absolute top-3 left-3 z-[500] flex items-center gap-2 rounded-full border border-white/70 bg-stone-950/85 px-3 py-2 text-xs font-medium text-white shadow-lg backdrop-blur-md">
+        <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_4px_rgba(251,191,36,0.18)]" />
+        Click anywhere to analyze
+      </div>
       <MapContainer
         center={[40.4168, -3.7038]} // Madrid
         zoom={5.5}

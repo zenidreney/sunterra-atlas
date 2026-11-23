@@ -16,11 +16,12 @@ export default function RadarChartComponent({
 }) {
   const common = (
     <Tooltip
-      cursor={{ stroke: "#ffc400", strokeWidth: 2.5 }}
+      cursor={{ stroke: "#f59e0b", strokeWidth: 1.5 }}
       contentStyle={{
-        backgroundColor: "#fffbeb",
-        borderColor: "#ff8f00",
-        borderRadius: "16px",
+        backgroundColor: "#ffffff",
+        borderColor: "#e7e5e4",
+        borderRadius: "12px",
+        boxShadow: "0 12px 30px rgba(28, 25, 23, 0.12)",
       }}
     />
   );
@@ -29,10 +30,8 @@ export default function RadarChartComponent({
     <RadarChart
       style={{
         width: "100%",
-        height: "100%",
+        height: "300px",
         maxWidth: "500px",
-        maxHeight: "80vh",
-        aspectRatio: 1,
       }}
       responsive
       outerRadius="80%"
@@ -44,21 +43,24 @@ export default function RadarChartComponent({
         bottom: 20,
       }}
     >
-      <PolarGrid />
-      <PolarAngleAxis dataKey="month" />
-      <PolarRadiusAxis angle={30} stroke="#f59e0b" tick={{ fill: "#92400e" }} />
+      <PolarGrid stroke="#d6d3d1" />
+      <PolarAngleAxis
+        dataKey="month"
+        tick={{ fill: "#57534e", fontSize: 12 }}
+      />
       <PolarRadiusAxis
-        angle={300}
-        stroke="#f59e0b"
-        tick={{ fill: "#92400e" }}
+        angle={30}
+        stroke="#d6d3d1"
+        tick={{ fill: "#78716c", fontSize: 10 }}
       />
       {common}
       <Radar
         name="Solar Radiation"
         dataKey="solarRadiation"
-        stroke="#92400e"
+        stroke="#d97706"
+        strokeWidth={2.5}
         fill="#f59e0b"
-        fillOpacity={0.6}
+        fillOpacity={0.3}
       />
     </RadarChart>
   );

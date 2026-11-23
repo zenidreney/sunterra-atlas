@@ -4,7 +4,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ReferenceLine,
   Tooltip,
   XAxis,
@@ -13,17 +12,18 @@ import {
 
 const common = (
   <>
-    <CartesianGrid strokeDasharray="4 4" stroke="#ffc400" />
-    <XAxis dataKey="month" stroke="#92400e" />
-    <YAxis width="auto" stroke="#92400e" />
+    <CartesianGrid vertical={false} strokeDasharray="4 4" stroke="#e7e5e4" />
+    <XAxis dataKey="month" stroke="#78716c" tickLine={false} axisLine={false} />
+    <YAxis width="auto" stroke="#78716c" tickLine={false} axisLine={false} />
     <Tooltip
       contentStyle={{
-        backgroundColor: "#fffbeb",
-        borderColor: "#ff8f00",
-        borderRadius: "16px",
+        backgroundColor: "#ffffff",
+        borderColor: "#e7e5e4",
+        borderRadius: "12px",
+        boxShadow: "0 12px 30px rgba(28, 25, 23, 0.12)",
       }}
+      cursor={{ fill: "#fef3c7", fillOpacity: 0.55 }}
     />
-    <Legend />
   </>
 );
 
@@ -39,34 +39,34 @@ export default function MonthlyBarChart({
       style={{
         width: "100%",
         maxWidth: "700px",
-        maxHeight: "70vh",
-        aspectRatio: 1.618,
+        height: "260px",
       }}
       responsive
       data={data}
       margin={{
-        top: 5,
-        right: 0,
-        left: 0,
-        bottom: 5,
+        top: 16,
+        right: 14,
+        left: 4,
+        bottom: 8,
       }}
     >
       {common}
 
       <Bar
         dataKey="solarRadiation"
-        fill="#d97706"
-        activeBar={{ fill: "#fde68a", stroke: "#d97706", fillOpacity: 0.8 }}
-        radius={[10, 10, 0, 0]}
+        name="Solar radiation"
+        fill="#f59e0b"
+        activeBar={{ fill: "#fbbf24", stroke: "#b45309" }}
+        radius={[6, 6, 0, 0]}
       />
       <ReferenceLine
         y={annualRadiation}
         label={{
           value: "Average",
-          fill: "#92400e",
+          fill: "#15803d",
           position: "insideBottomRight",
         }}
-        stroke="red"
+        stroke="#15803d"
         strokeDasharray="4 4"
       />
     </BarChart>
