@@ -34,13 +34,6 @@ input {
   color: #451a03;
 }
 
-.app-shell {
-  background-color: var(--canvas);
-  background-image:
-    radial-gradient(circle at 12% 4%, rgb(251 191 36 / 16%), transparent 25rem),
-    radial-gradient(circle at 92% 88%, rgb(21 128 61 / 8%), transparent 30rem);
-}
-
 .leaflet-container {
   background: #e7e5e4;
   font-family: inherit;

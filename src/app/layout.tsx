@@ -23,13 +23,13 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <LocationContextProvider>
-            <div className="app-shell flex min-h-screen flex-col md:h-screen">
+            <div className="flex flex-col min-h-screen md:h-screen bg-amber-50">
               <TopBar />
-              <main className="flex grow flex-col gap-4 px-3 py-4 md:min-h-0 md:flex-row-reverse lg:px-6 lg:py-5">
-                <div className="w-full md:w-[38%] md:overflow-y-auto md:pr-1">
+              <main className="flex flex-col grow md:min-h-0 gap-3 p-2.5 md:p-4 justify-evenly md:flex-row-reverse z-50">
+                <div className="w-full md:w-5/12 md:px-4 md:overflow-y-auto rounded-xl ">
                   {children}
                 </div>
-                <div className="h-full min-h-[22rem] w-full overflow-hidden rounded-3xl border border-white/80 bg-white shadow-[0_24px_70px_-28px_rgba(28,25,23,0.45)] ring-1 ring-stone-200/70 md:h-auto md:min-h-0 md:w-[62%]">
+                <div className="w-full h-full md:w-7/12 md:h-auto border border-amber-700/80 md:px-0 rounded-xl overflow-hidden shadow-lg">
                   <MapView />
                 </div>
               </main>
